@@ -480,12 +480,11 @@ function WorkflowDiagram() {
 }
 
 /* ===== Structured Case Study (editorial layout) ===== */
-function StructuredCaseStudy({ id, label, summary, problemRows, problemNote, approach, executionSteps, resultBullets, validation }) {
+function StructuredCaseStudy({ id, summary, problemRows, problemNote, approach, executionSteps, resultBullets, validation }) {
   return (
     <div id={id} className="card-hover rounded-[12px]" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
       <div className="px-6 md:px-7 py-5 md:py-6">
-        <div className="mono text-[11px] uppercase tracking-[0.08em]" style={{ color: 'var(--text-tertiary)' }}>{label}</div>
-        <div className="mt-1 text-[16px] md:text-[18px] font-semibold tracking-[-0.01em]" style={{ color: 'var(--text-primary)' }}>{summary.title}</div>
+        <div className="text-[16px] md:text-[18px] font-semibold tracking-[-0.01em]" style={{ color: 'var(--text-primary)' }}>{summary.title}</div>
         <div className="mt-2 text-[14px] leading-[1.6]" style={{ textWrap: 'pretty', color: 'var(--text-secondary)' }}>{summary.headline}</div>
       </div>
       <div className="px-6 md:px-7 pb-7 md:pb-8 pt-0" style={{ borderTop: '1px solid var(--border)' }}>
@@ -595,7 +594,6 @@ function ProjectHana() {
           <div className="mt-10">
             <StructuredCaseStudy
               id="case-translate"
-              label="Case Study"
               summary={{
                 title: '검수 피드백 기반 재번역 루프 설계',
                 headline: '사용자가 재번역을 요청해도 직전 개선점이 반영되지 않던 문제를 독립 의도 분기로 풀어낸 과정',
@@ -636,7 +634,6 @@ function ProjectHana() {
           <div className="mt-10">
             <StructuredCaseStudy
               id="case-rag"
-              label="Case Study"
               summary={{
                 title: 'RAG 인제스트 리스크 유형화',
                 headline: '표·외부 URL·도메인 용어가 RAG 파이프라인에서 왜곡되는 리스크를 사전 유형화하고 정량 평가 체계를 수립한 과정',

@@ -595,7 +595,7 @@ function ProjectHana() {
           <div className="mt-10">
             <StructuredCaseStudy
               id="case-translate"
-              label="Case Study · 단독 담당"
+              label="Case Study"
               summary={{
                 title: '검수 피드백 기반 재번역 루프 설계',
                 headline: '사용자가 재번역을 요청해도 직전 개선점이 반영되지 않던 문제를 독립 의도 분기로 풀어낸 과정',
@@ -630,13 +630,13 @@ function ProjectHana() {
           </div>
           <h3 className="text-[22px] md:text-[28px] font-semibold tracking-[-0.02em]" style={{ color: 'var(--text-primary)' }}>대출 상품 추천 Agent — RAG 데이터 검증</h3>
           <p className="mt-3 text-[15px] md:text-[16px] max-w-[820px]" style={{ textWrap: 'pretty', color: 'var(--text-secondary)' }}>
-            약 100종 수급 문서의 RAG 인제스트 리스크를 사전 유형화하고, robi-g-max 환경의 AWS Sonnet-4.5 모델로 샘플 문서 변환 품질을 정량 평가하는 거버넌스 체계를 수립.
+            약 100종 수급 문서의 RAG 인제스트 리스크를 사전 유형화하고, 문서 변환 품질을 정량 평가하는 거버넌스 체계를 수립.
           </p>
 
           <div className="mt-10">
             <StructuredCaseStudy
               id="case-rag"
-              label="Case Study · 공동 담당"
+              label="Case Study"
               summary={{
                 title: 'RAG 인제스트 리스크 유형화',
                 headline: '표·외부 URL·도메인 용어가 RAG 파이프라인에서 왜곡되는 리스크를 사전 유형화하고 정량 평가 체계를 수립한 과정',
@@ -843,16 +843,9 @@ function AnalysisMiniPreview() {
   ];
   return (
     <div className="lift-hover rounded-[12px] overflow-hidden" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
-      {/* Top bar — 단독 담당 emphasis */}
-      <div className="px-6 py-5 flex items-center justify-between gap-4" style={{ borderBottom: '1px solid var(--border)' }}>
-        <div className="flex-1 min-w-0">
-          <div className="text-[15px] md:text-[17px] font-semibold tracking-[-0.005em]" style={{ color: 'var(--text-primary)' }}>
-            AI 판정 전환 분석기 — 모델 배포 전 성능 변화 사전 검증 자동화
-          </div>
-        </div>
-        <div className="hidden sm:flex items-center gap-2 mono text-[10.5px] shrink-0" style={{ color: 'var(--text-tertiary)' }}>
-          <span>Python · Pandas · Claude</span>
-        </div>
+      {/* Tools meta strip */}
+      <div className="px-6 py-3 flex items-center justify-end" style={{ borderBottom: '1px solid var(--border)', background: 'var(--bg)' }}>
+        <span className="mono text-[10.5px]" style={{ color: 'var(--text-tertiary)' }}>Python · Pandas · Claude</span>
       </div>
 
       {/* Pipeline */}
@@ -1101,44 +1094,69 @@ function ProjectInterX() {
 
         <RoleSection items={roles} />
 
-        <div className="mt-12 md:mt-16">
-          <AnalysisMiniPreview />
+        {/* Sub Project 1 — 단독 담당: AI 판정 전환 분석기 */}
+        <div className="mt-16 md:mt-24">
+          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-3">
+            <span className="mono text-[11px] uppercase tracking-[0.12em] font-medium" style={{ color: 'var(--text-primary)' }}>01 · 단독 담당</span>
+            <span style={{ color: 'var(--border-strong)' }}>/</span>
+            <span className="mono text-[11px] uppercase tracking-[0.12em]" style={{ color: 'var(--text-tertiary)' }}>Sub Project 1</span>
+          </div>
+          <h3 className="text-[22px] md:text-[28px] font-semibold tracking-[-0.02em]" style={{ color: 'var(--text-primary)' }}>AI 판정 전환 분석기</h3>
+          <p className="mt-3 text-[15px] md:text-[16px] max-w-[820px]" style={{ textWrap: 'pretty', color: 'var(--text-secondary)' }}>
+            모델 배포 전 성능 변화를 자동 비교·검증하는 분석 도구
+          </p>
+          <div className="mt-10">
+            <AnalysisMiniPreview />
+          </div>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div className="card-hover rounded-[12px] p-7 md:p-8" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
-            <div className="mono text-[11px] uppercase tracking-[0.12em]" style={{ color: 'var(--text-tertiary)' }}>성과 · 모델 로직 개선</div>
-            <div className="mt-6 flex items-baseline gap-3 tnum">
-              <span className="text-[44px] md:text-[56px] font-semibold tracking-[-0.03em] leading-none" style={{ color: 'var(--accent)' }}>+10.38</span>
-              <span className="text-[16px] mono" style={{ color: 'var(--text-secondary)' }}>%p</span>
-            </div>
-            <div className="mt-3 mono text-[13px] tnum" style={{ color: 'var(--text-secondary)' }}>OK Rate · 62.21% → 72.59%</div>
-            <p className="mt-6 text-[14.5px] leading-[1.7]" style={{ textWrap: 'pretty', color: 'var(--text-primary)' }}>
-              Mono 이미지 검사에서 Peeloff(치명 불량)와 이물질(양품)이 형태가 유사해 오분류되는 문제.<br/>
-              단일 임계값 적용 → 한계 발견 → 근본 원인 분석 → 조명별 차등 임계값(PSR/PAD) 적용으로 Peeloff 미검과 이물질 과검을 동시에 감소.
-            </p>
-            <div className="mt-6 pt-5 flex flex-wrap gap-2" style={{ borderTop: '1px solid var(--border)' }}>
-              <span className="kw-chip">Otsu Gray Value</span>
-              <span className="kw-chip">조명별 차등 임계값</span>
-              <span className="kw-chip">단계적 가설 검증</span>
-            </div>
+        {/* Sub Project 2 — 공동 담당: PCB 검사 모델 개선 */}
+        <div className="mt-20 md:mt-28">
+          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-3">
+            <span className="mono text-[11px] uppercase tracking-[0.12em] font-medium" style={{ color: 'var(--text-primary)' }}>02 · 공동 담당</span>
+            <span style={{ color: 'var(--border-strong)' }}>/</span>
+            <span className="mono text-[11px] uppercase tracking-[0.12em]" style={{ color: 'var(--text-tertiary)' }}>Sub Project 2</span>
           </div>
+          <h3 className="text-[22px] md:text-[28px] font-semibold tracking-[-0.02em]" style={{ color: 'var(--text-primary)' }}>PCB 검사 모델 로직 · 데이터 전략 개선</h3>
+          <p className="mt-3 text-[15px] md:text-[16px] max-w-[820px]" style={{ textWrap: 'pretty', color: 'var(--text-secondary)' }}>
+            오분류 원인 분석과 전략적 데이터 수집으로 OK Rate 10.38%p 개선·데이터셋 33.5% 확장 — R&D팀과 공동 작업.
+          </p>
 
-          <div className="card-hover rounded-[12px] p-7 md:p-8" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
-            <div className="mono text-[11px] uppercase tracking-[0.12em]" style={{ color: 'var(--text-tertiary)' }}>성과 · 데이터 전략</div>
-            <div className="mt-6 flex items-baseline gap-3 tnum">
-              <span className="text-[44px] md:text-[56px] font-semibold tracking-[-0.03em] leading-none" style={{ color: 'var(--accent)' }}>+33.5</span>
-              <span className="text-[16px] mono" style={{ color: 'var(--text-secondary)' }}>% 확장</span>
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="card-hover rounded-[12px] p-7 md:p-8" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
+              <div className="mono text-[11px] uppercase tracking-[0.12em]" style={{ color: 'var(--text-tertiary)' }}>성과 · 모델 로직 개선</div>
+              <div className="mt-6 flex items-baseline gap-3 tnum">
+                <span className="text-[44px] md:text-[56px] font-semibold tracking-[-0.03em] leading-none" style={{ color: 'var(--accent)' }}>+10.38</span>
+                <span className="text-[16px] mono" style={{ color: 'var(--text-secondary)' }}>%p</span>
+              </div>
+              <div className="mt-3 mono text-[13px] tnum" style={{ color: 'var(--text-secondary)' }}>OK Rate · 62.21% → 72.59%</div>
+              <p className="mt-6 text-[14.5px] leading-[1.7]" style={{ textWrap: 'pretty', color: 'var(--text-primary)' }}>
+                Mono 이미지 검사에서 Peeloff(치명 불량)와 이물질(양품)이 형태가 유사해 오분류되는 문제.<br/>
+                단일 임계값 적용 → 한계 발견 → 근본 원인 분석 → 조명별 차등 임계값(PSR/PAD) 적용으로 Peeloff 미검과 이물질 과검을 동시에 감소.
+              </p>
+              <div className="mt-6 pt-5 flex flex-wrap gap-2" style={{ borderTop: '1px solid var(--border)' }}>
+                <span className="kw-chip">Otsu Gray Value</span>
+                <span className="kw-chip">조명별 차등 임계값</span>
+                <span className="kw-chip">단계적 가설 검증</span>
+              </div>
             </div>
-            <div className="mt-3 mono text-[13px] tnum" style={{ color: 'var(--text-secondary)' }}>데이터셋 · 109,351건 → 145,984건 (2025.02 → 12)</div>
-            <p className="mt-6 text-[14.5px] leading-[1.7]" style={{ textWrap: 'pretty', color: 'var(--text-primary)' }}>
-              무작위 데이터 수집의 비효율을 끊고, 과검·미검 이미지의 오분류 패턴 분석을 통해 개선 우선순위 결함 유형을 선별.<br/>
-              현장 엔지니어와 협업해 타깃 결함 유형 중심의 전략적 수집 프로세스를 구축하고 희소 클래스 데이터를 확보.
-            </p>
-            <div className="mt-6 pt-5 flex flex-wrap gap-2" style={{ borderTop: '1px solid var(--border)' }}>
-              <span className="kw-chip">희소 클래스 확보</span>
-              <span className="kw-chip">모델-데이터 형상 관리</span>
-              <span className="kw-chip">현장 협업</span>
+
+            <div className="card-hover rounded-[12px] p-7 md:p-8" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
+              <div className="mono text-[11px] uppercase tracking-[0.12em]" style={{ color: 'var(--text-tertiary)' }}>성과 · 데이터 전략</div>
+              <div className="mt-6 flex items-baseline gap-3 tnum">
+                <span className="text-[44px] md:text-[56px] font-semibold tracking-[-0.03em] leading-none" style={{ color: 'var(--accent)' }}>+33.5</span>
+                <span className="text-[16px] mono" style={{ color: 'var(--text-secondary)' }}>% 확장</span>
+              </div>
+              <div className="mt-3 mono text-[13px] tnum" style={{ color: 'var(--text-secondary)' }}>데이터셋 · 109,351건 → 145,984건 (2025.02 → 12)</div>
+              <p className="mt-6 text-[14.5px] leading-[1.7]" style={{ textWrap: 'pretty', color: 'var(--text-primary)' }}>
+                무작위 데이터 수집의 비효율을 끊고, 과검·미검 이미지의 오분류 패턴 분석을 통해 개선 우선순위 결함 유형을 선별.<br/>
+                현장 엔지니어와 협업해 타깃 결함 유형 중심의 전략적 수집 프로세스를 구축하고 희소 클래스 데이터를 확보.
+              </p>
+              <div className="mt-6 pt-5 flex flex-wrap gap-2" style={{ borderTop: '1px solid var(--border)' }}>
+                <span className="kw-chip">희소 클래스 확보</span>
+                <span className="kw-chip">모델-데이터 형상 관리</span>
+                <span className="kw-chip">현장 협업</span>
+              </div>
             </div>
           </div>
         </div>
@@ -1170,7 +1188,7 @@ function ProjectNHN() {
       <div className="max-w-[1180px] mx-auto px-6 md:px-10">
         <div className="mono text-[11px] uppercase tracking-[0.12em] mb-6" style={{ color: 'var(--text-tertiary)' }}>Featured Project · 03</div>
         <h2 className="text-[28px] md:text-[42px] font-semibold tracking-[-0.025em] leading-[1.15]" style={{ color: 'var(--text-primary)' }}>
-          Customer Service 6년
+          Customer Service
         </h2>
         <p className="mt-4 text-[16px] md:text-[18px] max-w-[820px]" style={{ textWrap: 'pretty', color: 'var(--text-secondary)' }}>
           NHN Cloud · 티켓링크의 CS 운영을 6년 담당.<br/>

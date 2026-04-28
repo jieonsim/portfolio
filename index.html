@@ -4,12 +4,13 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Jieon Sim · Portfolio</title>
+<meta name="description" content="Jieon Sim — Prompt Engineer · Problem Solver. CS 6년의 사용자 이해를 AI Agent 기획·설계·구현으로 옮기는 사람." />
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231C1B1A'/><circle cx='16' cy='16' r='3' fill='white'/></svg>" />
 
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 
 <script src="https://cdn.tailwindcss.com/3.4.16"></script>
 <script>
@@ -18,15 +19,7 @@
       extend: {
         fontFamily: {
           sans: ['Pretendard', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
-          mono: ['Pretendard', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
-        },
-        colors: {
-          neutral: {
-            50:  '#FAFAF9', 100: '#F4F4F2', 200: '#E7E5E0', 300: '#D9D7D1',
-            400: '#9C9893', 500: '#6B6862', 600: '#4A4844', 700: '#2F2E2C',
-            800: '#1C1B1A', 900: '#141312',
-          },
-          accent: { DEFAULT: '#7D6F5A', soft: '#EBE7DD', ink: '#5A4F3E' },
+          mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
         },
       },
     },
@@ -35,20 +28,24 @@
 
 <style>
   :root {
-    --bg:        #FAFAF9;
+    --bg:        #FAF9F6;
+    --bg-warm:   #F4F2EC;
     --surface:   #FFFFFF;
-    --soft:      #F4F4F2;
-    --border:        #E7E5E0;
-    --border-strong: #D9D7D1;
-    --text-primary:   #1C1B1A;
-    --text-secondary: #6B6862;
-    --text-tertiary:  #9C9893;
+    --soft:      #F4F2EC;
+    --softer:    #EFEDE5;
+    --border:        #E5E2D9;
+    --border-strong: #D4D0C3;
+    --text-primary:   #1A1917;
+    --text-secondary: #5E5A52;
+    --text-tertiary:  #9C9789;
     --accent:      #7D6F5A;
-    --accent-soft: #EBE7DD;
-    --accent-ink:  #5A4F3E;
+    --accent-soft: #EBE5D6;
+    --accent-ink:  #4F4534;
+    --accent-warm: #B89B6E;
   }
   * { box-sizing: border-box; }
   html, body { background: var(--bg); color: var(--text-primary); }
+  html { scroll-behavior: smooth; }
   body {
     font-family: 'Pretendard', 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     font-size: 16px;
@@ -56,21 +53,56 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     letter-spacing: -0.005em;
+    overflow-x: hidden;
   }
   .tnum { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
-  .mono { font-family: 'Pretendard', 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif; }
+  .mono { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .display { font-family: 'Pretendard', 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif; font-feature-settings: "ss01"; }
 
+  /* ===== Animations ===== */
   @keyframes lineUp {
-    from { opacity: 0; transform: translateY(14px); }
+    from { opacity: 0; transform: translateY(18px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-  .line-up { opacity: 0; animation: lineUp 600ms cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+  .line-up { opacity: 0; animation: lineUp 800ms cubic-bezier(0.22, 1, 0.36, 1) forwards; }
 
-  .card-hover { transition: border-color 200ms ease-out, transform 200ms ease-out, box-shadow 200ms ease-out; }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  .fade-in { opacity: 0; animation: fadeIn 1200ms ease-out forwards; }
+
+  /* Scroll-reveal */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 800ms cubic-bezier(0.22, 1, 0.36, 1), transform 800ms cubic-bezier(0.22, 1, 0.36, 1); }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  /* Hover */
+  .card-hover { transition: border-color 220ms ease-out, transform 220ms ease-out, box-shadow 220ms ease-out; }
   .card-hover:hover { border-color: var(--accent); }
-  .lift-hover { transition: transform 220ms ease-out, border-color 220ms ease-out, box-shadow 220ms ease-out; }
-  .lift-hover:hover { transform: translateY(-2px); border-color: var(--accent); box-shadow: 0 1px 2px rgba(28,27,26,0.04); }
+  .lift-hover { transition: transform 240ms ease-out, border-color 240ms ease-out, box-shadow 240ms ease-out; }
+  .lift-hover:hover { transform: translateY(-2px); border-color: var(--accent); box-shadow: 0 8px 24px -16px rgba(28,27,26,0.18); }
 
+  /* ===== Hero grid backdrop ===== */
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(125,111,90,0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(125,111,90,0.06) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(0,0,0,0.7) 0%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(0,0,0,0.7) 0%, transparent 80%);
+    pointer-events: none;
+  }
+
+  /* ===== Section index (right rail) ===== */
+  .rail-link { display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 6px 0; }
+  .rail-line { display: block; width: 24px; height: 1px; background: var(--border-strong); transition: width 240ms ease, background 240ms ease; }
+  .rail-label { font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-tertiary); transition: color 240ms ease; }
+  .rail-link:hover .rail-line, .rail-link.active .rail-line { width: 36px; background: var(--accent); }
+  .rail-link:hover .rail-label, .rail-link.active .rail-label { color: var(--text-primary); }
+  .rail-link.active .rail-label { font-weight: 600; }
+
+  /* ===== Workflow Diagram ===== */
   .wf-node-inner {
     width: 100%; height: 100%;
     display: flex; align-items: center; justify-content: center;
@@ -87,40 +119,77 @@
   .wf-title { font-weight: 600; font-size: 13px; color: var(--text-primary); }
   .wf-sub   { font-size: 12px; color: var(--text-tertiary); }
 
-  .quote { border-left: 1px solid var(--border-strong); padding-left: 24px; }
-  .quote-accent { border-left: 4px solid var(--accent); padding-left: 24px; }
+  .quote-accent { border-left: 3px solid var(--accent); padding-left: 24px; }
 
   .nav-scrolled {
-    background: rgba(250, 250, 249, 0.78);
-    backdrop-filter: saturate(140%) blur(10px);
-    -webkit-backdrop-filter: saturate(140%) blur(10px);
+    background: rgba(250, 249, 246, 0.82);
+    backdrop-filter: saturate(140%) blur(12px);
+    -webkit-backdrop-filter: saturate(140%) blur(12px);
     border-bottom: 1px solid var(--border);
   }
 
-  ::selection { background: var(--text-primary); color: #fff; }
-  section[id] { scroll-margin-top: 72px; }
+  ::selection { background: var(--accent); color: #fff; }
+  section[id] { scroll-margin-top: 80px; }
   details > summary { list-style: none; cursor: pointer; }
   details > summary::-webkit-details-marker { display: none; }
 
-  /* Case Study — editorial chapter layout */
-  .cs-num {
-    font-weight: 500; font-size: 24px; letter-spacing: -0.02em;
-    line-height: 1; color: var(--accent); font-variant-numeric: tabular-nums;
-    display: block; margin-bottom: 8px;
+  /* ===== Hero meta card ===== */
+  .meta-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 28px 24px;
+    box-shadow: 0 1px 0 rgba(28,27,26,0.02), 0 12px 32px -24px rgba(28,27,26,0.18);
   }
-  @media (min-width: 768px) { .cs-num { font-size: 28px; } }
+  .meta-row {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 16px;
+    align-items: baseline;
+    padding: 14px 0;
+    border-top: 1px solid var(--border);
+  }
+  .meta-row:first-of-type { border-top: 0; padding-top: 0; }
+  .meta-label { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-tertiary); }
+  .meta-value { font-size: 14.5px; color: var(--text-primary); line-height: 1.55; }
+
+  /* Section header */
+  .section-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--text-tertiary);
+  }
+  .section-eyebrow::before {
+    content: ''; display: inline-block; width: 24px; height: 1px; background: var(--accent);
+  }
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.18em; color: var(--text-tertiary);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Case study */
+  .cs-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500; font-size: 13px; letter-spacing: 0.18em;
+    line-height: 1; color: var(--accent); font-variant-numeric: tabular-nums;
+    display: block; margin-bottom: 12px;
+    text-transform: uppercase;
+  }
   .cs-label {
-    font-weight: 600; font-size: 11px; letter-spacing: 0.16em;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500; font-size: 10.5px; letter-spacing: 0.18em;
     text-transform: uppercase; color: var(--text-tertiary);
     display: block; margin-bottom: 22px;
   }
   .cs-approach {
-    font-size: 15px; line-height: 1.75; color: var(--text-primary);
+    font-size: 15.5px; line-height: 1.78; color: var(--text-primary);
     max-width: 760px; text-wrap: pretty; white-space: pre-line;
   }
   .cs-result { display: flex; flex-direction: column; gap: 12px; }
   .cs-result li {
-    font-size: 15px; line-height: 1.75; color: var(--text-primary);
+    font-size: 15px; line-height: 1.78; color: var(--text-primary);
     display: flex; gap: 14px; align-items: flex-start;
   }
   .cs-result li::before {
@@ -128,21 +197,23 @@
     margin-top: 11px; border-radius: 999px; background: var(--accent);
   }
 
-  /* Pattern A — label/value rows */
-  .lv-row { display: grid; grid-template-columns: 130px 1fr; gap: 16px; align-items: baseline; padding: 8px 0; }
-  .lv-row .lv-label { color: var(--text-tertiary); font-size: 13.5px; letter-spacing: 0.02em; }
-  .lv-row .lv-value { color: var(--text-primary); font-size: 15.5px; line-height: 1.65; }
+  /* label/value rows */
+  .lv-row { display: grid; grid-template-columns: 130px 1fr; gap: 16px; align-items: baseline; padding: 10px 0; }
+  .lv-row + .lv-row { border-top: 1px dashed var(--border); }
+  .lv-row .lv-label { font-family: 'JetBrains Mono', monospace; color: var(--text-tertiary); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .lv-row .lv-value { color: var(--text-primary); font-size: 15px; line-height: 1.65; }
   @media (max-width: 640px) {
     .lv-row { grid-template-columns: 1fr; gap: 4px; padding: 6px 0; }
   }
 
-  /* Pattern C — numbered steps (subtle, gray label) */
+  /* numbered steps */
   .step-row { display: grid; grid-template-columns: 36px 1fr; gap: 16px; align-items: baseline; }
   .step-row + .step-row { margin-top: 22px; }
   .step-row .step-num {
+    font-family: 'JetBrains Mono', monospace;
     color: var(--text-tertiary);
     font-weight: 500;
-    font-size: 12.5px;
+    font-size: 12px;
     letter-spacing: 0.10em;
     line-height: 1.5;
     font-variant-numeric: tabular-nums;
@@ -153,1162 +224,123 @@
 
   /* ROLE chip card */
   .role-card {
-    background: var(--soft);
+    background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 18px 18px 20px;
-    transition: border-color 200ms ease-out, transform 200ms ease-out;
+    border-radius: 12px;
+    padding: 22px 22px 24px;
+    transition: border-color 200ms ease-out, transform 200ms ease-out, box-shadow 200ms ease-out;
+    position: relative;
+    overflow: hidden;
   }
-  .role-card:hover { border-color: var(--accent); }
-  .role-card .role-num { color: var(--accent); font-weight: 600; font-size: 12px; letter-spacing: 0.08em; margin-bottom: 10px; display: block; }
-  .role-card .role-title { color: var(--text-primary); font-size: 14.5px; font-weight: 600; line-height: 1.4; letter-spacing: -0.005em; }
-  .role-card .role-sep { width: 24px; height: 1px; background: var(--border-strong); margin: 12px 0; }
-  .role-card .role-desc { color: var(--text-secondary); font-size: 13.5px; line-height: 1.6; }
+  .role-card::before {
+    content: ''; position: absolute; top: 0; left: 0; height: 2px; width: 0;
+    background: var(--accent); transition: width 320ms ease;
+  }
+  .role-card:hover { border-color: var(--accent-warm); transform: translateY(-1px); }
+  .role-card:hover::before { width: 100%; }
+  .role-card .role-num {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent); font-weight: 500; font-size: 11px; letter-spacing: 0.14em; margin-bottom: 14px; display: block;
+  }
+  .role-card .role-title { color: var(--text-primary); font-size: 15px; font-weight: 600; line-height: 1.4; letter-spacing: -0.005em; }
+  .role-card .role-sep { width: 28px; height: 1px; background: var(--border-strong); margin: 14px 0; }
+  .role-card .role-desc { color: var(--text-secondary); font-size: 13.5px; line-height: 1.65; }
 
   .kw-chip {
     display: inline-block;
     background: var(--soft);
     border: 1px solid var(--border);
     border-radius: 999px;
-    padding: 4px 10px;
+    padding: 5px 12px;
     font-size: 12px;
     color: var(--text-secondary);
     letter-spacing: 0.01em;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Project hero */
+  .project-hero {
+    position: relative;
+    border-radius: 16px;
+    background: linear-gradient(180deg, var(--soft) 0%, var(--bg) 100%);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .project-hero::before {
+    content: ''; position: absolute; top: 0; right: 0; width: 280px; height: 280px;
+    background: radial-gradient(circle, rgba(184,155,110,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .project-num-big {
+    font-family: 'Instrument Serif', 'Times New Roman', Georgia, serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 112px;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: var(--accent);
+    opacity: 0.95;
+    font-variant-numeric: tabular-nums;
+  }
+  @media (min-width: 768px) { .project-num-big { font-size: 160px; } }
+
+  /* Sub-project chip */
+  .sub-chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    background: var(--surface);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+  .sub-chip .dot { width: 5px; height: 5px; border-radius: 999px; background: var(--accent); }
+  .sub-chip.lead { background: var(--text-primary); border-color: var(--text-primary); color: #fff; }
+  .sub-chip.lead .dot { background: var(--accent-warm); }
+
+  /* Hero name display */
+  .hero-name {
+    font-family: 'Pretendard', 'Inter', system-ui, sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.045em;
+  }
+  .accent-text { color: var(--accent); font-weight: 700; }
+
+  /* Pulse dot */
+  .pulse-dot { position: relative; width: 8px; height: 8px; border-radius: 999px; background: #5BA88B; display: inline-block; }
+  .pulse-dot::after {
+    content: ''; position: absolute; inset: 0; border-radius: 999px; background: #5BA88B;
+    animation: pulse 2s ease-out infinite;
+  }
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(2.6); opacity: 0; }
   }
 
   @media (max-width: 640px) {
     .nav-links a { font-size: 12px; }
+  }
+
+  /* Print */
+  @media print {
+    .rail, header, .no-print { display: none !important; }
   }
 </style>
 </head>
 <body>
 <div id="root"></div>
 
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 
-<script type="text/babel" data-presets="react">
-const { useState, useEffect } = React;
-
-/* ===== Top Nav ===== */
-function TopNav() {
-  const [scrolled, setScrolled] = useState(false);
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-  const links = [['About', '#about'], ['Career', '#career'], ['Projects', '#projects'], ['Contact', '#contact']];
-  return (
-    <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-200 ${scrolled ? 'nav-scrolled' : ''}`}>
-      <div className="max-w-[1180px] mx-auto px-6 md:px-10 h-14 flex items-center justify-between">
-        <a href="#top" className="font-semibold tracking-tight text-[15px]" style={{ color: 'var(--text-primary)' }}>Jieon Sim</a>
-        <nav className="nav-links flex items-center gap-6 md:gap-8">
-          {links.map(([label, href]) => (
-            <a key={href} href={href} className="text-[13px] md:text-[14px] transition-colors duration-200"
-               style={{ color: 'var(--text-secondary)' }}
-               onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
-               onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}>
-              {label}
-            </a>
-          ))}
-        </nav>
-      </div>
-    </header>
-  );
-}
-
-/* ===== Hero ===== */
-function Hero() {
-  return (
-    <section id="top" className="pt-40 md:pt-48 pb-24 md:pb-32">
-      <div className="max-w-[1180px] mx-auto px-6 md:px-10">
-        <h1 className="font-semibold tracking-[-0.025em] leading-[1.05]" style={{ color: 'var(--text-primary)' }}>
-          <span className="line-up block text-[36px] sm:text-[48px] md:text-[64px] lg:text-[72px]" style={{ animationDelay: '120ms' }}>
-            CS가 AI를 만났을 때,
-          </span>
-          <span className="line-up block text-[36px] sm:text-[48px] md:text-[64px] lg:text-[72px]" style={{ animationDelay: '320ms' }}>
-            사용자를 가장 잘 아는
-          </span>
-          <span className="line-up block text-[36px] sm:text-[48px] md:text-[64px] lg:text-[72px]" style={{ animationDelay: '520ms' }}>
-            Problem Solver.
-          </span>
-        </h1>
-        <p className="line-up max-w-[720px] mt-10 md:mt-12 text-[15px] md:text-[16px] leading-[1.75]"
-           style={{ animationDelay: '760ms', textWrap: 'pretty', color: 'var(--text-secondary)' }}>
-          사용자가 어디에서 막히는지를 가장 가까이서 들어온 시간을 기반으로,<br/>
-          이제 그 이해를 AI Agent의 기획·설계·구현으로 직접 옮깁니다.<br/>
-          문제 정의부터 프로덕트 출시까지, 영역의 경계 없이 끝까지 책임집니다.
-        </p>
-      </div>
-    </section>
-  );
-}
-
-/* ===== About ===== */
-function About() {
-  const whoIAm = ['LLM Agent를 기획·설계·구현', 'AI 모델 성능 분석으로 서비스 개선', 'CS 6년, 사용자 Pain Point 발굴'];
-  const whyEssential = ['프롬프트 설계로 AI 응답 품질 통제', '데이터로 문제 정의·검증', '산출물로 기획 의도 명확화'];
-  return (
-    <section id="about" className="py-24 md:py-32" style={{ borderTop: '1px solid var(--border)' }}>
-      <div className="max-w-[1180px] mx-auto px-6 md:px-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-14">
-          <div className="md:col-span-5">
-            <div className="mono text-[11px] uppercase tracking-[0.12em] mb-6" style={{ color: 'var(--text-tertiary)' }}>About</div>
-            <p className="quote-accent text-[17px] md:text-[18px] leading-[1.75]" style={{ textWrap: 'pretty', color: 'var(--text-primary)' }}>
-              에이전트 페르소나 기획부터 시나리오 로직 설계, 인터페이스 구현까지 제품의 시작과 끝을 직접 책임지며, 테스트 데이터를 기획·로직 개선으로 되돌리는 선순환 구조를 직접 만들어 왔습니다.
-            </p>
-            <p className="quote-accent text-[17px] md:text-[18px] leading-[1.75]" style={{ textWrap: 'pretty', color: 'var(--text-primary)' }}>
-              기획자–엔지니어 사이의 정보 병목을 없애고, 기술적 실현 가능성과 비즈니스 가치를 동시에 고려해 가장 빠른 속도로 제품 진화를 가능하게 합니다.
-            </p>
-          </div>
-          <div className="md:col-span-7">
-            <div className="space-y-10">
-              <div>
-                <div className="mono text-[11px] uppercase tracking-[0.12em] mb-4" style={{ color: 'var(--text-tertiary)' }}>Who I am</div>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  {whoIAm.map((t, i) => (
-                    <div key={i} className="card-hover rounded-[10px] p-6" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
-                      <div className="mono text-[11px] mb-3 tnum" style={{ color: 'var(--text-tertiary)' }}>0{i+1}</div>
-                      <div className="text-[14px] leading-[1.55]" style={{ textWrap: 'pretty', color: 'var(--text-primary)' }}>{t}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <div className="mono text-[11px] uppercase tracking-[0.12em] mb-4" style={{ color: 'var(--text-tertiary)' }}>Why essential</div>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  {whyEssential.map((t, i) => (
-                    <div key={i} className="card-hover rounded-[10px] p-6" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
-                      <div className="mono text-[11px] mb-3 tnum" style={{ color: 'var(--text-tertiary)' }}>0{i+1}</div>
-                      <div className="text-[14px] leading-[1.55]" style={{ textWrap: 'pretty', color: 'var(--text-primary)' }}>{t}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ===== Career ===== */
-function Career() {
-  const nodes = [
-    { period: '2018.02 — 2024.02', company: 'NHN Service',  role: 'Customer Service', tenure: '6년',     quote: '사용자가 무엇에 막히는지를 가장 가까이서 들어왔습니다' },
-    { period: '2024.09 — 2026.01', company: '인터엑스',     role: 'AI Consultant',    tenure: '1년 5개월', quote: 'AI 모델의 오분류를 데이터·로직으로 풀어내는 법을 익혔습니다' },
-    { period: '2026.01 — 재직 중', company: '포지큐브',     role: 'Prompt Engineer',  tenure: '4개월',    quote: 'AI Agent를 기획·설계·구현·검증까지 직접 책임집니다' },
-  ];
-  return (
-    <section id="career" className="py-24 md:py-32" style={{ borderTop: '1px solid var(--border)' }}>
-      <div className="max-w-[1180px] mx-auto px-6 md:px-10">
-        <div className="mono text-[11px] uppercase tracking-[0.12em] mb-6" style={{ color: 'var(--text-tertiary)' }}>Career</div>
-        <h2 className="text-[28px] md:text-[36px] font-semibold tracking-[-0.02em] mb-14 md:mb-20" style={{ color: 'var(--text-primary)' }}>
-          7년 9개월의 궤적
-        </h2>
-        <div className="relative">
-          <div className="absolute left-[7px] top-1 bottom-1 w-px" style={{ background: 'var(--border)' }} aria-hidden="true"></div>
-          <ul className="space-y-12 md:space-y-14">
-            {nodes.map((n, i) => (
-              <li key={i} className="relative pl-10 group">
-                <span className="absolute left-0 top-1.5 w-[15px] h-[15px] rounded-full flex items-center justify-center transition-colors duration-200"
-                      style={{ border: '1px solid var(--border-strong)', background: 'var(--surface)' }}>
-                  <span className="block w-[5px] h-[5px] rounded-full transition-colors duration-200"
-                        style={{ background: i === nodes.length - 1 ? 'var(--accent)' : 'var(--text-tertiary)' }}></span>
-                </span>
-                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-3">
-                  <span className="mono text-[12px] tnum" style={{ color: 'var(--text-tertiary)' }}>{n.period}</span>
-                  <span style={{ color: 'var(--border-strong)' }}>·</span>
-                  <span className="text-[14px]" style={{ color: 'var(--text-secondary)' }}>{n.company}</span>
-                  <span style={{ color: 'var(--border-strong)' }}>·</span>
-                  <span className="text-[15px] font-semibold" style={{ color: 'var(--text-primary)' }}>{n.role}</span>
-                  <span style={{ color: 'var(--border-strong)' }}>·</span>
-                  <span className="mono text-[12px]" style={{ color: 'var(--text-tertiary)' }}>{n.tenure}</span>
-                </div>
-                <p className="text-[15px] md:text-[16px] max-w-[640px]" style={{ textWrap: 'pretty', color: 'var(--text-secondary)' }}>
-                  "{n.quote}"
-                </p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ===== ROLE Section (4-card chip grid) ===== */
-function RoleSection({ items }) {
-  return (
-    <div className="mt-10">
-      <div className="mono text-[11px] uppercase tracking-[0.12em] mb-4" style={{ color: 'var(--text-tertiary)' }}>Role · 담당 역할</div>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        {items.map((r, i) => (
-          <div key={i} className="role-card">
-            <span className="role-num">0{i+1}</span>
-            <div className="role-title">{r.title}</div>
-            <div className="role-sep"></div>
-            <div className="role-desc" style={{ textWrap: 'pretty' }}>{r.desc}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-/* ===== Workflow Diagram ===== */
-function WorkflowDiagram() {
-  const W = 1100, H = 760;
-  const N = { w: 168, h: 56 };
-  const SN = { w: 168, h: 44 };
-  const l1Y = 28;
-  const l1Items = ['사용자 입력 대기', '대화 이력 조회', '업로드 파일 확인', 'LLM 호출', '의도 분기'];
-  const l1StartX = 24;
-  const l1Gap = (W - 24 * 2 - N.w * 5) / 4;
-  const l1Xs = l1Items.map((_, i) => l1StartX + i * (N.w + l1Gap));
-  const l2BranchY = 168, l2NodeY = 196;
-  const branches = [
-    { key: 'Error',     desc: '파일 처리 오류' },
-    { key: 'Translate', desc: '번역 요청 언어 지정 여부 확인' },
-    { key: 'Review',    desc: '지표 점수·개선점 출력' },
-    { key: 'Document',  desc: '파일 기반 Q&A 응답' },
-    { key: 'etc',       desc: '지원 범위 외 처리 불가' },
-  ];
-  const colCount = branches.length;
-  const colW = (W - 24 * 2) / colCount;
-  const colCenters = branches.map((_, i) => 24 + colW * i + colW / 2);
-  const translateCenterX = colCenters[1];
-  const l3Y = 320, l3SubY = 348;
-  const l3 = [
-    { key: 'Fail',    desc: '추가 정보 요청',   x: translateCenterX - 110 },
-    { key: 'Success', desc: '파일 확장자 확인', x: translateCenterX + 110 },
-  ];
-  const l4ParentX = translateCenterX + 110;
-  const l4Y = 472, l4SubY = 500;
-  const l4 = [
-    { key: 'Extension Error', desc: '미지원 파일 확장자', x: l4ParentX - 200 },
-    { key: 'Success',         desc: '번역 API 호출',     x: l4ParentX },
-    { key: 'Exception',       desc: '번역 서버 응답 오류', x: l4ParentX + 200 },
-  ];
-  const l5Y = 624, l5X = l4ParentX;
-  const nodeRect = (cx, cy, w = N.w, h = N.h) => ({ x: cx - w / 2, y: cy - h / 2, w, h });
-  const l1Rects = l1Xs.map((x) => ({ x, y: l1Y, w: N.w, h: N.h }));
-  const l1LastCx = l1Rects[4].x + N.w / 2;
-  const l1LastCy = l1Rects[4].y + N.h;
-  const l2Rects = colCenters.map((cx) => nodeRect(cx, l2NodeY + SN.h / 2, SN.w, SN.h));
-  const lineColor = '#D9D7D1';
-  return (
-    <div className="rounded-[12px] overflow-hidden" style={{ background: 'var(--soft)', border: '1px solid var(--border)' }}>
-      <div className="hidden md:block">
-        <svg viewBox={`0 0 ${W} ${H}`} width="100%" preserveAspectRatio="xMidYMid meet" style={{ display: 'block' }}>
-          {l1Rects.slice(0, -1).map((r, i) => {
-            const next = l1Rects[i + 1];
-            return <line key={`l1c-${i}`} x1={r.x + r.w} y1={r.y + r.h / 2} x2={next.x} y2={r.y + r.h / 2} stroke={lineColor} strokeWidth="1" />;
-          })}
-          <line x1={l1LastCx} y1={l1LastCy} x2={l1LastCx} y2={l2BranchY - 28} stroke={lineColor} strokeWidth="1" />
-          <line x1={Math.min(...colCenters, l1LastCx)} y1={l2BranchY - 28} x2={Math.max(...colCenters, l1LastCx)} y2={l2BranchY - 28} stroke={lineColor} strokeWidth="1" />
-          {colCenters.map((cx, i) => <line key={`l2-drop-${i}`} x1={cx} y1={l2BranchY - 28} x2={cx} y2={l2BranchY - 4} stroke={lineColor} strokeWidth="1" />)}
-          <line x1={translateCenterX} y1={l2NodeY + SN.h} x2={translateCenterX} y2={l3Y - 28} stroke={lineColor} strokeWidth="1" />
-          <line x1={l3[0].x} y1={l3Y - 28} x2={l3[1].x} y2={l3Y - 28} stroke={lineColor} strokeWidth="1" />
-          {l3.map((b, i) => <line key={`l3-drop-${i}`} x1={b.x} y1={l3Y - 28} x2={b.x} y2={l3Y - 4} stroke={lineColor} strokeWidth="1" />)}
-          <line x1={l4ParentX} y1={l3SubY + SN.h} x2={l4ParentX} y2={l4Y - 28} stroke={lineColor} strokeWidth="1" />
-          <line x1={l4[0].x} y1={l4Y - 28} x2={l4[2].x} y2={l4Y - 28} stroke={lineColor} strokeWidth="1" />
-          {l4.map((b, i) => <line key={`l4-drop-${i}`} x1={b.x} y1={l4Y - 28} x2={b.x} y2={l4Y - 4} stroke={lineColor} strokeWidth="1" />)}
-          <line x1={l5X} y1={l4SubY + SN.h} x2={l5X} y2={l5Y - 4} stroke={lineColor} strokeWidth="1" />
-          {colCenters.map((cx, i) => <text key={`l2-label-${i}`} x={cx} y={l2BranchY} textAnchor="middle" fontFamily="Pretendard, Inter, system-ui, sans-serif" fontSize="10.5" fill="#9C9893" style={{ letterSpacing: '0.06em', textTransform: 'uppercase' }}>{branches[i].key}</text>)}
-          {l3.map((b, i) => <text key={`l3-label-${i}`} x={b.x} y={l3Y} textAnchor="middle" fontFamily="Pretendard, Inter, system-ui, sans-serif" fontSize="10.5" fill="#9C9893" style={{ letterSpacing: '0.06em', textTransform: 'uppercase' }}>{b.key}</text>)}
-          {l4.map((b, i) => <text key={`l4-label-${i}`} x={b.x} y={l4Y} textAnchor="middle" fontFamily="Pretendard, Inter, system-ui, sans-serif" fontSize="10.5" fill="#9C9893" style={{ letterSpacing: '0.06em', textTransform: 'uppercase' }}>{b.key}</text>)}
-          {l1Rects.map((r, i) => (
-            <foreignObject key={`l1-${i}`} x={r.x} y={r.y} width={r.w} height={r.h}>
-              <div className="wf-node-inner" xmlns="http://www.w3.org/1999/xhtml"><div><div className="wf-title">{l1Items[i]}</div></div></div>
-            </foreignObject>
-          ))}
-          {l2Rects.map((r, i) => (
-            <foreignObject key={`l2-${i}`} x={r.x} y={r.y} width={r.w} height={r.h}>
-              <div className="wf-node-inner" xmlns="http://www.w3.org/1999/xhtml"><div className="wf-sub" style={{ color: '#1C1B1A', fontSize: 12, fontWeight: 500 }}>{branches[i].desc}</div></div>
-            </foreignObject>
-          ))}
-          {l3.map((b, i) => {
-            const r = nodeRect(b.x, l3SubY + SN.h / 2, SN.w, SN.h);
-            return (
-              <foreignObject key={`l3-${i}`} x={r.x} y={r.y} width={r.w} height={r.h}>
-                <div className="wf-node-inner" xmlns="http://www.w3.org/1999/xhtml"><div className="wf-sub" style={{ color: '#1C1B1A', fontSize: 12, fontWeight: 500 }}>{b.desc}</div></div>
-              </foreignObject>
-            );
-          })}
-          {l4.map((b, i) => {
-            const r = nodeRect(b.x, l4SubY + SN.h / 2, SN.w, SN.h);
-            return (
-              <foreignObject key={`l4-${i}`} x={r.x} y={r.y} width={r.w} height={r.h}>
-                <div className="wf-node-inner" xmlns="http://www.w3.org/1999/xhtml"><div className="wf-sub" style={{ color: '#1C1B1A', fontSize: 12, fontWeight: 500 }}>{b.desc}</div></div>
-              </foreignObject>
-            );
-          })}
-          {(() => {
-            const r = nodeRect(l5X, l5Y + N.h / 2 - 4, N.w, N.h);
-            return (
-              <foreignObject x={r.x} y={r.y} width={r.w} height={r.h}>
-                <div className="wf-node-inner dark" xmlns="http://www.w3.org/1999/xhtml"><div style={{ fontWeight: 600, fontSize: 13, color: '#fff' }}>번역 결과 출력</div></div>
-              </foreignObject>
-            );
-          })()}
-        </svg>
-      </div>
-      <div className="md:hidden p-5">
-        <ol className="space-y-2">
-          {l1Items.map((t, i) => (
-            <li key={`mb-l1-${i}`} className="rounded-[8px] px-4 py-3 text-[13px]" style={{ border: '1px solid var(--border)', background: 'var(--surface)', color: 'var(--text-primary)' }}>{t}</li>
-          ))}
-        </ol>
-        <div className="mt-5 mono text-[10px] tracking-[0.08em] uppercase" style={{ color: 'var(--text-tertiary)' }}>의도 분기</div>
-        <ul className="mt-2 space-y-2">
-          {branches.map((b, i) => (
-            <li key={`mb-l2-${i}`} className="rounded-[8px] px-4 py-3" style={{ border: '1px solid var(--border)', background: 'var(--surface)' }}>
-              <div className="mono text-[10px] uppercase tracking-[0.06em]" style={{ color: 'var(--text-tertiary)' }}>{b.key}</div>
-              <div className="text-[13px] mt-0.5" style={{ color: 'var(--text-primary)' }}>{b.desc}</div>
-            </li>
-          ))}
-        </ul>
-        <div className="mt-4 rounded-[8px] px-4 py-3 text-[13px] font-semibold" style={{ background: 'var(--text-primary)', color: '#fff' }}>번역 결과 출력</div>
-      </div>
-    </div>
-  );
-}
-
-/* ===== Structured Case Study (editorial layout) ===== */
-function StructuredCaseStudy({ id, summary, problemRows, problemNote, approach, executionSteps, resultBullets, validation }) {
-  return (
-    <div id={id} className="card-hover rounded-[12px]" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
-      <div className="px-6 md:px-7 py-5 md:py-6">
-        <div className="text-[16px] md:text-[18px] font-semibold tracking-[-0.01em]" style={{ color: 'var(--text-primary)' }}>{summary.title}</div>
-        <div className="mt-2 text-[14px] leading-[1.6]" style={{ textWrap: 'pretty', color: 'var(--text-secondary)' }}>{summary.headline}</div>
-      </div>
-      <div className="px-6 md:px-7 pb-7 md:pb-8 pt-0" style={{ borderTop: '1px solid var(--border)' }}>
-        <div className="space-y-12 md:space-y-14 mt-9">
-          <div>
-            <span className="cs-num">01</span>
-            <span className="cs-label">Problem · 문제 정의</span>
-            <div>
-              {problemRows.map((row, i) => (
-                <div key={i} className="lv-row">
-                  <div className="lv-label">{row.label}</div>
-                  <div className="lv-value" style={{ textWrap: 'pretty' }}>{row.value}</div>
-                </div>
-              ))}
-            </div>
-            {problemNote && (
-              <p className="mt-5 text-[15px] leading-[1.7]" style={{ color: 'var(--text-primary)', textWrap: 'pretty' }}>{problemNote}</p>
-            )}
-          </div>
-          <div>
-            <span className="cs-num">02</span>
-            <span className="cs-label">Approach · 접근 방식</span>
-            <p className="cs-approach">{approach}</p>
-          </div>
-          <div>
-            <span className="cs-num">03</span>
-            <span className="cs-label">Execution · 실행</span>
-            <div>
-              {executionSteps.map((s, i) => (
-                <div key={i} className="step-row">
-                  <div className="step-num">0{i+1}</div>
-                  <div>
-                    <div className="step-title">{s.title}</div>
-                    <div className="step-desc" style={{ textWrap: 'pretty' }}>{s.desc}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div>
-            <span className="cs-num">04</span>
-            <span className="cs-label">Result · 결과</span>
-            <ul className="cs-result">
-              {resultBullets.map((r, i) => (
-                <li key={i}><span style={{ textWrap: 'pretty' }}>{r}</span></li>
-              ))}
-            </ul>
-          </div>
-
-          {validation && (
-            <div>
-              <span className="cs-num">05</span>
-              <span className="cs-label">Validation · 검증 결과</span>
-              {validation}
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ===== Featured Project 1 — Hana ===== */
-function ProjectHana() {
-  const roles = [
-    { title: 'Agent 시나리오 설계',     desc: '입력 대기부터 결과 출력까지 전체 노드 흐름과 예외 분기 설계' },
-    { title: '프롬프트 엔지니어링',    desc: '금융·법령 도메인 특화 페르소나 작성 및 케이스별 동작 검증' },
-    { title: 'RAG 데이터 품질 관리',   desc: '임베딩 저하·파싱 오류 등 리스크 사전 분석 및 이슈 유형화' },
-    { title: '프로젝트 관리·협업',     desc: '고객사 인터뷰를 통한 Pain Point 분석 및 산출물 작성' },
-  ];
-  return (
-    <section id="projects" className="py-24 md:py-32" style={{ borderTop: '1px solid var(--border)' }}>
-      <div className="max-w-[1180px] mx-auto px-6 md:px-10">
-        <div className="mono text-[11px] uppercase tracking-[0.12em] mb-6" style={{ color: 'var(--text-tertiary)' }}>Featured Project · 01</div>
-        <h2 className="text-[28px] md:text-[42px] font-semibold tracking-[-0.025em] leading-[1.15]" style={{ color: 'var(--text-primary)' }}>
-          하나은행 생성형 AI 혁신금융서비스
-        </h2>
-        <p className="mt-4 text-[16px] md:text-[18px] max-w-[820px]" style={{ textWrap: 'pretty', color: 'var(--text-secondary)' }}>
-          임직원 업무 지원용 LLM 기반 AI Agent 서비스 구축
-        </p>
-        <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 mono text-[12px]" style={{ color: 'var(--text-tertiary)' }}>
-          <span>포지큐브</span>
-          <span style={{ color: 'var(--border-strong)' }}>·</span>
-          <span>Prompt Engineer</span>
-          <span style={{ color: 'var(--border-strong)' }}>·</span>
-          <span className="tnum">2026.02 — 진행 중</span>
-        </div>
-
-        <RoleSection items={roles} />
-
-        <div className="mt-16 md:mt-24">
-          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-3">
-            <span className="mono text-[11px] uppercase tracking-[0.12em] font-medium" style={{ color: 'var(--text-primary)' }}>01 · 단독 담당</span>
-            <span style={{ color: 'var(--border-strong)' }}>/</span>
-            <span className="mono text-[11px] uppercase tracking-[0.12em]" style={{ color: 'var(--text-tertiary)' }}>Sub Project 1</span>
-          </div>
-          <h3 className="text-[22px] md:text-[28px] font-semibold tracking-[-0.02em]" style={{ color: 'var(--text-primary)' }}>글로벌 번역 Agent</h3>
-          <p className="mt-3 text-[15px] md:text-[16px] max-w-[820px]" style={{ textWrap: 'pretty', color: 'var(--text-secondary)' }}>
-            16개국 다국어 금융·법령 문서 번역 Agent — 기획·설계·구현·검증을 단독으로 담당.
-          </p>
-
-          <div className="mt-10">
-            <WorkflowDiagram />
-            <div className="mt-3 text-[12.5px]" style={{ color: 'var(--text-tertiary)' }}>↩ 모든 처리 종료 후 사용자 입력 대기로 복귀</div>
-          </div>
-
-          <div className="mt-10">
-            <StructuredCaseStudy
-              id="case-translate"
-              summary={{
-                title: '검수 피드백 기반 재번역 루프 설계',
-                headline: '사용자가 재번역을 요청해도 직전 개선점이 반영되지 않던 문제를 독립 의도 분기로 풀어낸 과정',
-              }}
-              problemRows={[
-                { label: '사용자 시나리오',  value: '번역 → 검수 후 "재번역해줘 / 네"로 재요청' },
-                { label: '발생 문제',        value: '직전 번역과 동일한 지시문으로 재실행 — 개선 포인트 미반영' },
-                { label: '원인 1 · 의도',    value: '재번역·확답이 별도 의도로 정의되지 않아 일반 문의로 분기' },
-                { label: '원인 2 · 데이터',  value: '검수 결과가 번역 단계로 전달되지 않아 모델이 피드백을 미인식' },
-                { label: '사용자 영향',      value: '파일·언어 재입력 후에도 같은 결과물 — 검수 가치 무력화' },
-              ]}
-              approach={`검수 직후 사용자의 동의·재요청을 별도 의도로 정의하고, 그 경로에서만 직전 검수의 개선 포인트를 번역 페르소나에 자동 주입하는 독립 피드백 루프를 설계하여 일반 번역 플로우와 분리해 변경 영향을 격리했습니다.`}
-              executionSteps={[
-                { title: '재번역 전용 의도 분기 신설',  desc: '검수 직후 확답·재번역 발화를 자동 분류 — 직전 응답이 검수 결과인지 여부와 발화 키워드(재번역·다시·확답)를 결합한 분류 규칙 설계.' },
-                { title: '검수 피드백 자동 추출',       desc: '검수 응답 말미의 메타데이터에서 개선 포인트를 자동 파싱하여, 번역 페르소나 프롬프트에 우선순위 섹션으로 주입.' },
-                { title: '대화 이력 참조 인덱스 교정',   desc: '직전 응답 참조 위치 오류(첫 요소 → 마지막 요소)를 수정하여 의도 분류 정확도 회복.' },
-              ]}
-              resultBullets={[
-                '파일 재업로드·언어 재지정 없이 확답만으로 재번역 경로 진입',
-                '검수 단계의 개선 포인트가 다음 번역에 자동 반영되는 피드백 루프 구축',
-                '재번역 전용 의도 분기 확보로 일반 플로우와 독립 관리 가능 — 응답 포맷 개편·효과 측정 등 후속 개선의 기반 확보',
-              ]}
-            />
-          </div>
-        </div>
-
-        <div className="mt-20 md:mt-28">
-          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-3">
-            <span className="mono text-[11px] uppercase tracking-[0.12em] font-medium" style={{ color: 'var(--text-primary)' }}>02 · 공동 담당</span>
-            <span style={{ color: 'var(--border-strong)' }}>/</span>
-            <span className="mono text-[11px] uppercase tracking-[0.12em]" style={{ color: 'var(--text-tertiary)' }}>Sub Project 2</span>
-          </div>
-          <h3 className="text-[22px] md:text-[28px] font-semibold tracking-[-0.02em]" style={{ color: 'var(--text-primary)' }}>대출 상품 추천 Agent — RAG 데이터 검증</h3>
-          <p className="mt-3 text-[15px] md:text-[16px] max-w-[820px]" style={{ textWrap: 'pretty', color: 'var(--text-secondary)' }}>
-            약 100종 수급 문서의 RAG 인제스트 리스크를 사전 유형화하고, 문서 변환 품질을 정량 평가하는 거버넌스 체계를 수립.
-          </p>
-
-          <div className="mt-10">
-            <StructuredCaseStudy
-              id="case-rag"
-              summary={{
-                title: 'RAG 인제스트 리스크 유형화',
-                headline: '표·외부 URL·도메인 용어가 RAG 파이프라인에서 왜곡되는 리스크를 사전 유형화하고 정량 평가 체계를 수립한 과정',
-              }}
-              problemRows={[
-                { label: '대상 문서',     value: '약 100종 수급 문서 — 상품 요약서·운용 가이드·워크북·Q&A 등' },
-                { label: '취약 구조',     value: '중첩 표·페이지 경계 분할 표·외부 URL·산정식·이미지/도식이 변환 단계에서 왜곡·누락' },
-                { label: '도메인 용어',   value: 'HCGS·C1/C2·ASS 등급 등 은행 고유 용어가 임베딩 연관성 저하의 원인으로 작용' },
-                { label: '운영 공백',     value: '배포 후 발견 시 인덱스 재구축 비용 발생 — 인제스트 단계에서 리스크를 가시화할 필요' },
-              ]}
-              approach={`RAG 파이프라인(수급 → 변환 → 청킹 → 임베딩) 각 단계의 취약 요소를 문서 유형 × 이슈 유형 매트릭스로 사전 분류해 대응 가이드를 산출하고 수급 문서의 접수–분류–변환–검수 라이프사이클을 표준화해 운영 거버넌스를 확보했습니다.`}
-              executionSteps={[
-                { title: '취약 구조 사전 분석',         desc: '중첩 표·페이지 경계 분할 표·외부 URL·산정식·이미지/도식 등 구조 단위로 위험 요소 식별 및 변환 가이드 도출.' },
-                { title: '문서 분류·이력 관리 체계',    desc: '문서 유형별 분류 기준과 이력 관리 프로세스 표준화 — 상품 개정 이벤트 발생 시 즉시 대응 가능한 운영 구조 확보.' },
-                { title: '변환 산출물 검수 모델',       desc: '20개 패턴 × 5개 카테고리 평가 항목 정의 + 영역별 비중을 반영한 가중 평균 보존율 산정 모델 설계.' },
-              ]}
-              resultBullets={[
-                '배포 전 인제스트·청킹 설계에 리스크 선반영 → 운영 후 인덱스 재구축 리스크 축소',
-                '수급 문서 분류·이력 관리 체계로 상품 개정 이벤트 발생 시 즉시 대응 가능',
-                '가중 평균 보존율 모델 + 카테고리별 정량 지표 확보 — 용어집 구축·2-pass 전처리 규칙 등 후속 개선 액션 도출',
-              ]}
-              validation={
-                <div className="space-y-7">
-                  {/* Test documents + weighted avg */}
-                  <div>
-                    <div className="mono text-[10.5px] uppercase tracking-[0.12em] mb-3" style={{ color: 'var(--text-tertiary)' }}>Test Documents · 샘플 문서별 보존율</div>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                      {[
-                        { name: '온렌딩대출 상품요약서', val: '72', sub: '%' },
-                        { name: '온렌딩대출 워크북',     val: '78', sub: '%' },
-                      ].map((d, i) => (
-                        <div key={i} className="rounded-[8px] p-4" style={{ background: 'var(--soft)', border: '1px solid var(--border)' }}>
-                          <div className="text-[12.5px] font-medium" style={{ color: 'var(--text-primary)' }}>{d.name}</div>
-                          <div className="mt-3 flex items-baseline gap-1 tnum">
-                            <span className="text-[28px] font-semibold tracking-[-0.02em] leading-none" style={{ color: 'var(--text-primary)' }}>{d.val}</span>
-                            <span className="text-[13px] mono" style={{ color: 'var(--text-secondary)' }}>{d.sub}</span>
-                          </div>
-                        </div>
-                      ))}
-                      <div className="rounded-[8px] p-4" style={{ background: 'var(--accent-soft)', border: '1px solid var(--accent)' }}>
-                        <div className="mono text-[10px] uppercase tracking-[0.1em]" style={{ color: 'var(--accent)' }}>Weighted Avg · 가중 평균</div>
-                        <div className="mt-3 flex items-baseline gap-1 tnum">
-                          <span className="text-[28px] font-semibold tracking-[-0.02em] leading-none" style={{ color: 'var(--accent)' }}>약 75</span>
-                          <span className="text-[13px] mono" style={{ color: 'var(--accent-ink)' }}>%</span>
-                        </div>
-                        <div className="mt-2 text-[11.5px]" style={{ color: 'var(--accent-ink)' }}>전체 평균 보존율</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Weighted formula */}
-                  <div>
-                    <div className="mono text-[10.5px] uppercase tracking-[0.12em] mb-3" style={{ color: 'var(--text-tertiary)' }}>Weighted Formula · 산정 방식</div>
-                    <div className="rounded-[8px] p-5" style={{ background: 'var(--soft)', border: '1px solid var(--border)' }}>
-                      <div className="grid grid-cols-3 gap-3">
-                        {[
-                          { area: '표 구조 영역',      weight: 60, retention: 82 },
-                          { area: '본문 텍스트',       weight: 30, retention: 92 },
-                          { area: '이미지/도식·기타', weight: 10, retention: 96 },
-                        ].map((x, i) => (
-                          <div key={i} className="text-center">
-                            <div className="text-[12px] mb-3" style={{ color: 'var(--text-secondary)' }}>{x.area}</div>
-                            <div className="flex items-baseline justify-center gap-1 tnum">
-                              <span className="text-[20px] font-semibold tracking-[-0.02em]" style={{ color: 'var(--text-primary)' }}>{x.weight}%</span>
-                              <span className="mono text-[10px]" style={{ color: 'var(--text-tertiary)' }}>비중</span>
-                            </div>
-                            <div className="mt-1 mono text-[10.5px]" style={{ color: 'var(--text-tertiary)' }}>×</div>
-                            <div className="flex items-baseline justify-center gap-1 tnum">
-                              <span className="text-[20px] font-semibold tracking-[-0.02em]" style={{ color: 'var(--text-primary)' }}>{x.retention}%</span>
-                              <span className="mono text-[10px]" style={{ color: 'var(--text-tertiary)' }}>보존율</span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                      <div className="mt-5 pt-4 flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1 mono text-[12px]" style={{ borderTop: '1px solid var(--border)', color: 'var(--text-tertiary)' }}>
-                        <span>(82 × 0.60)</span>
-                        <span style={{ color: 'var(--border-strong)' }}>+</span>
-                        <span>(92 × 0.30)</span>
-                        <span style={{ color: 'var(--border-strong)' }}>+</span>
-                        <span>(96 × 0.10)</span>
-                        <span style={{ color: 'var(--accent)' }}>≈</span>
-                        <span className="tnum text-[14px] font-semibold" style={{ color: 'var(--accent)' }}>75%</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Category retention */}
-                  <div>
-                    <div className="flex items-center justify-between mb-3 gap-3">
-                      <div className="mono text-[10.5px] uppercase tracking-[0.12em]" style={{ color: 'var(--text-tertiary)' }}>Category Retention · 카테고리별 보존율</div>
-                      <div className="mono text-[10px]" style={{ color: 'var(--text-tertiary)' }}>20 패턴 × 5 카테고리</div>
-                    </div>
-                    <div className="rounded-[8px] p-5 space-y-3" style={{ background: 'var(--soft)', border: '1px solid var(--border)' }}>
-                      {[
-                        { code: 'A', name: '표 구조 보존',           sub: '셀 / 헤더 / 병합셀',          val: 89 },
-                        { code: 'B', name: '문장 구조 보존',         sub: '줄바꿈 / 문장 병합 / 순서',   val: 93 },
-                        { code: 'C', name: '이미지 / 도식 영역',      sub: '도식 · 이미지 메타',           val: 97 },
-                        { code: 'D', name: '페이지 / 레이아웃 경계', sub: '페이지 분리 · 정렬',           val: 98 },
-                        { code: 'E', name: '주석 / 기호 / 보조 텍스트', sub: '각주 · 기호 표시',           val: 98 },
-                      ].map((c, i) => (
-                        <div key={i}>
-                          <div className="flex items-baseline justify-between mb-1.5 gap-3">
-                            <div className="flex items-baseline gap-2 min-w-0">
-                              <span className="mono text-[11px]" style={{ color: 'var(--text-tertiary)' }}>{c.code}</span>
-                              <span className="text-[12.5px] font-medium" style={{ color: 'var(--text-primary)' }}>{c.name}</span>
-                              <span className="text-[11px] hidden md:inline" style={{ color: 'var(--text-tertiary)' }}>· {c.sub}</span>
-                            </div>
-                            <div className="tnum mono text-[12px] font-semibold shrink-0" style={{ color: 'var(--text-primary)' }}>{c.val}%</div>
-                          </div>
-                          <div className="h-[5px] rounded-full overflow-hidden" style={{ background: 'var(--border)' }}>
-                            <div className="h-full rounded-full" style={{ width: `${c.val}%`, background: 'var(--accent)' }}></div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Selected patterns */}
-                  <div>
-                    <div className="flex items-center justify-between mb-3 gap-3">
-                      <div className="mono text-[10.5px] uppercase tracking-[0.12em]" style={{ color: 'var(--text-tertiary)' }}>Selected Patterns · 주요 변환 이슈 패턴</div>
-                      <div className="mono text-[10px]" style={{ color: 'var(--text-tertiary)' }}>20 항목 중 발췌</div>
-                    </div>
-                    <div className="rounded-[8px] overflow-hidden" style={{ background: 'var(--soft)', border: '1px solid var(--border)' }}>
-                      <div className="overflow-x-auto">
-                        <table className="w-full text-[11.5px]" style={{ color: 'var(--text-primary)' }}>
-                          <thead>
-                            <tr style={{ color: 'var(--text-tertiary)', borderBottom: '1px solid var(--border)' }}>
-                              <th className="text-left py-2.5 px-4 mono uppercase tracking-[0.06em] text-[10px] font-normal w-12">No</th>
-                              <th className="text-left py-2.5 px-3 mono uppercase tracking-[0.06em] text-[10px] font-normal">문제 패턴</th>
-                              <th className="text-left py-2.5 px-3 mono uppercase tracking-[0.06em] text-[10px] font-normal hidden md:table-cell">변환 산출물 양상</th>
-                              <th className="text-right py-2.5 px-4 mono uppercase tracking-[0.06em] text-[10px] font-normal w-20">보존율</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {[
-                              { no: 1,  pattern: '셀 경계가 약한 표 구조',       behavior: "값 누락 또는 ''/공백 셀 생성", val: 97.0 },
-                              { no: 2,  pattern: '병합 셀(rowspan/colspan)',     behavior: '상위 항목 값이 하위 행에 미반복', val: 97.5 },
-                              { no: 6,  pattern: '단계형 프로세스 도식 (①~⑤)',  behavior: '단계 구분 없이 한 문장으로 연결',  val: 99.0 },
-                              { no: 11, pattern: '표 내 기호(○/X) 중심 구조',    behavior: '기호 일부 누락',                val: 99.0 },
-                              { no: 17, pattern: '제목 + 표 연속 배치',          behavior: '제목 계층(level)이 변경되어 표시', val: 99.6 },
-                            ].map((r, i) => (
-                              <tr key={r.no} style={{ borderTop: i === 0 ? '0' : '1px solid var(--border)' }}>
-                                <td className="py-2.5 px-4 mono tnum" style={{ color: 'var(--text-tertiary)' }}>{String(r.no).padStart(2, '0')}</td>
-                                <td className="py-2.5 px-3" style={{ color: 'var(--text-primary)' }}>{r.pattern}</td>
-                                <td className="py-2.5 px-3 hidden md:table-cell" style={{ color: 'var(--text-secondary)' }}>{r.behavior}</td>
-                                <td className="py-2.5 px-4 text-right tnum mono" style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{r.val.toFixed(1)}%</td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-
-                  <p className="text-[12.5px] leading-[1.7]" style={{ textWrap: 'pretty', color: 'var(--text-tertiary)' }}>
-                    영역별 비중을 반영한 가중 평균 보존율 모델 → 단순 평균이 아닌 문서 품질에 대한 객관적 근거 확보. 카테고리·패턴 단위 정량 지표로 후속 개선 액션(용어집 구축·2-pass 전처리 규칙) 도출.
-                  </p>
-                </div>
-              }
-            />
-          </div>
-
-          <blockquote className="mt-12 quote-accent max-w-[820px]">
-            <p className="text-[18px] md:text-[20px] leading-[1.6] font-medium tracking-[-0.01em]" style={{ textWrap: 'pretty', color: 'var(--text-primary)' }}>
-              "RAG는 검색 모델만의 문제가 아니라, 그 앞단의 인제스트 설계에서 이미 절반 이상이 결정된다."
-            </p>
-          </blockquote>
-        </div>
-
-        <div className="mt-16 md:mt-20 pt-8" style={{ borderTop: '1px solid var(--border)' }}>
-          <div className="mono text-[11px] uppercase tracking-[0.12em] mb-4" style={{ color: 'var(--text-tertiary)' }}>Tech & Tools</div>
-          <div className="flex flex-wrap gap-x-4 gap-y-2 text-[13.5px]" style={{ color: 'var(--text-secondary)' }}>
-            {['Claude Sonnet 4.6', 'Amazon Bedrock', 'Titan Embedding', 'Python', 'DSL Workflow', 'Prompt Engineering', 'RAG'].map((t, i, arr) => (
-              <span key={t} className="flex items-center gap-4">
-                <span>{t}</span>
-                {i < arr.length - 1 && <span style={{ color: 'var(--border-strong)' }}>·</span>}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ===== Analysis Tool Mini Preview ===== */
-function AnalysisMiniPreview() {
-  const pipeline = [
-    { lbl: '01 · Input',     title: '두 시점 판정 결과 CSV', desc: '모델 버전 업데이트 전·후 수십만 건의 판정 결과 입력' },
-    { lbl: '02 · Match',     title: '이미지 경로 자동 매칭',  desc: 'Path 기준 동일 이미지를 1:1로 매칭해 전후 비교 단위 확보' },
-    { lbl: '03 · Aggregate', title: '전환 패턴 통계 산출',    desc: '판정 변화 조합별 건수·비율 자동 집계 — OK·NG·UNK + AICodeName' },
-    { lbl: '04 · Output',    title: 'Excel 리포트 자동 생성', desc: '건별 추적 시트 + 전환 통계 시트 2 시트로 자동 출력 (xlsxwriter)' },
-  ];
-  const capabilities = [
-    {
-      title: '건별 판정 변화 추적',
-      desc: '동일 이미지의 불량 분류 코드(AICodeName)와 판정 결과(OK/NG/UNK)를 전후 시점별로 1:1 매칭해 차이 추적.',
-    },
-    {
-      title: '전환 패턴 통계 분석',
-      desc: '판정 변화 조합별 건수·비율을 자동 산출 — 과검 개선 효과와 미검 발생 리스크를 동시 정량화.',
-    },
-  ];
-  return (
-    <div className="lift-hover rounded-[12px] overflow-hidden" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
-      {/* Tools meta strip */}
-      <div className="px-6 py-3 flex items-center justify-end" style={{ borderBottom: '1px solid var(--border)', background: 'var(--bg)' }}>
-        <span className="mono text-[10.5px]" style={{ color: 'var(--text-tertiary)' }}>Python · Pandas · Claude</span>
-      </div>
-
-      {/* Pipeline */}
-      <div className="px-6 pt-6">
-        <div className="mono text-[10.5px] uppercase tracking-[0.14em] mb-4" style={{ color: 'var(--text-tertiary)' }}>Pipeline</div>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
-          {pipeline.map((s, i) => (
-            <div key={i} className="rounded-[8px] p-4" style={{ background: 'var(--soft)', border: '1px solid var(--border)' }}>
-              <div className="mono text-[10px] uppercase tracking-[0.1em]" style={{ color: 'var(--accent)' }}>{s.lbl}</div>
-              <div className="mt-2 text-[14px] font-semibold leading-[1.35]" style={{ color: 'var(--text-primary)' }}>{s.title}</div>
-              <div className="mt-2 text-[12.5px] leading-[1.6]" style={{ textWrap: 'pretty', color: 'var(--text-secondary)' }}>{s.desc}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Capabilities */}
-      <div className="px-6 pt-7">
-        <div className="mono text-[10.5px] uppercase tracking-[0.14em] mb-4" style={{ color: 'var(--text-tertiary)' }}>Core Capabilities</div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          {capabilities.map((c, i) => (
-            <div key={i} className="rounded-[8px] p-5" style={{ background: 'var(--soft)', border: '1px solid var(--border)' }}>
-              <div className="text-[14.5px] font-semibold tracking-[-0.005em]" style={{ color: 'var(--text-primary)' }}>{c.title}</div>
-              <p className="mt-2 text-[13px] leading-[1.65]" style={{ textWrap: 'pretty', color: 'var(--text-secondary)' }}>{c.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Output — Dashboard 재구성 예시 (inline, portfolio tone) */}
-      <div className="px-6 pt-7 pb-6">
-        <div className="flex items-center justify-between mb-4 gap-3">
-          <div className="mono text-[10.5px] uppercase tracking-[0.14em]" style={{ color: 'var(--text-tertiary)' }}>Output · 재구성 예시</div>
-          <div className="mono text-[10px]" style={{ color: 'var(--text-tertiary)' }}>※ 포트폴리오용 샘플 데이터 시각화</div>
-        </div>
-
-        <div className="rounded-[10px] overflow-hidden" style={{ border: '1px solid var(--border)' }}>
-          {/* Browser-frame bar */}
-          <div className="px-3 py-2 flex items-center gap-2" style={{ borderBottom: '1px solid var(--border)', background: 'var(--soft)' }}>
-            <span className="block w-2 h-2 rounded-full" style={{ background: 'var(--border-strong)' }}></span>
-            <span className="block w-2 h-2 rounded-full" style={{ background: 'var(--border-strong)' }}></span>
-            <span className="block w-2 h-2 rounded-full" style={{ background: 'var(--border-strong)' }}></span>
-            <span className="ml-3 mono text-[10.5px]" style={{ color: 'var(--text-tertiary)' }}>analyzer.local · transition-dashboard</span>
-          </div>
-
-          {/* Context strip */}
-          <div className="px-5 py-3 flex flex-wrap items-center justify-between gap-3" style={{ borderBottom: '1px solid var(--border)', background: 'var(--bg)' }}>
-            <div className="flex items-center gap-2 mono text-[10.5px]" style={{ color: 'var(--text-tertiary)' }}>
-              <span>Workspace</span>
-              <span style={{ color: 'var(--border-strong)' }}>/</span>
-              <span>ATI55 · DME · 리드미 에칭</span>
-              <span style={{ color: 'var(--border-strong)' }}>/</span>
-              <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>Transition Analysis</span>
-            </div>
-            <div className="flex items-center gap-2 mono text-[10.5px]" style={{ color: 'var(--text-tertiary)' }}>
-              <span>Before · v2.4</span>
-              <span style={{ color: 'var(--accent)' }}>→</span>
-              <span>After · v2.5</span>
-            </div>
-          </div>
-
-          {/* Body */}
-          <div className="p-5" style={{ background: 'var(--surface)' }}>
-            {/* KPIs */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              {[
-                { lbl: 'Total · 처리 대상',     val: '248,719', sub: '건' },
-                { lbl: 'Retained · 판정 유지',  val: '86.9',    sub: '%' },
-                { lbl: 'Improved · NG → OK',  val: '+3.6',    sub: '%p', accent: true },
-                { lbl: 'Risk · OK → NG',      val: '−4.1',    sub: '%p' },
-              ].map((k, i) => (
-                <div key={i} className="rounded-[8px] p-4" style={{ background: 'var(--soft)', border: '1px solid var(--border)' }}>
-                  <div className="mono text-[10px] uppercase tracking-[0.08em]" style={{ color: 'var(--text-tertiary)' }}>{k.lbl}</div>
-                  <div className="mt-2 flex items-baseline gap-1 tnum">
-                    <span className="text-[22px] font-semibold tracking-[-0.02em] leading-none" style={{ color: k.accent ? 'var(--accent)' : 'var(--text-primary)' }}>{k.val}</span>
-                    <span className="text-[12px] mono" style={{ color: 'var(--text-secondary)' }}>{k.sub}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Matrix + Top transitions */}
-            <div className="mt-5 grid grid-cols-1 md:grid-cols-12 gap-4">
-              {/* Transition Matrix */}
-              <div className="md:col-span-7 rounded-[8px] p-4" style={{ background: 'var(--soft)', border: '1px solid var(--border)' }}>
-                <div className="flex items-center justify-between mb-3">
-                  <div className="text-[12.5px] font-semibold" style={{ color: 'var(--text-primary)' }}>전환 매트릭스</div>
-                  <div className="mono text-[10.5px]" style={{ color: 'var(--text-tertiary)' }}>Before × After · 비율(%)</div>
-                </div>
-                <div>
-                  <div className="flex">
-                    <div className="w-20 shrink-0"></div>
-                    <div className="grid grid-cols-3 gap-2 flex-1">
-                      {['OK', 'NG', 'UNK'].map(l => (
-                        <div key={l} className="text-center mono text-[10.5px] uppercase tracking-[0.06em]" style={{ color: 'var(--text-tertiary)' }}>After · {l}</div>
-                      ))}
-                    </div>
-                  </div>
-                  {[
-                    { row: 'OK',  vals: [62.4, 4.1, 1.2] },
-                    { row: 'NG',  vals: [3.6, 18.7, 1.8] },
-                    { row: 'UNK', vals: [1.4, 1.0, 5.8] },
-                  ].map((r, ri) => (
-                    <div key={r.row} className="flex items-stretch mt-2">
-                      <div className="w-20 shrink-0 flex items-center">
-                        <span className="mono text-[10.5px] uppercase tracking-[0.06em]" style={{ color: 'var(--text-tertiary)' }}>Before · {r.row}</span>
-                      </div>
-                      <div className="grid grid-cols-3 gap-2 flex-1">
-                        {r.vals.map((v, ci) => {
-                          const isDiag = ri === ci;
-                          const t = Math.min(v / 65, 1);
-                          const bg = isDiag
-                            ? `rgba(28,27,26,${0.10 + t * 0.78})`
-                            : `rgba(125,111,90,${0.05 + t * 0.30})`;
-                          return (
-                            <div key={ci} className="rounded-[6px] h-11 flex items-center justify-center"
-                                 style={{ background: bg, color: isDiag && t > 0.4 ? '#fff' : 'var(--text-primary)', border: '1px solid var(--border)' }}>
-                              <span className="tnum mono text-[12px] font-medium">{v.toFixed(1)}%</span>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-3 flex items-center gap-3 text-[10px]" style={{ color: 'var(--text-tertiary)' }}>
-                  <span>대각선 · 판정 유지</span>
-                  <span style={{ color: 'var(--border-strong)' }}>·</span>
-                  <span>오프대각선 · 판정 변화</span>
-                </div>
-              </div>
-
-              {/* Top transitions */}
-              <div className="md:col-span-5 rounded-[8px] p-4" style={{ background: 'var(--soft)', border: '1px solid var(--border)' }}>
-                <div className="flex items-center justify-between mb-3">
-                  <div className="text-[12.5px] font-semibold" style={{ color: 'var(--text-primary)' }}>주요 전환 패턴</div>
-                  <div className="mono text-[10.5px]" style={{ color: 'var(--text-tertiary)' }}>건수 기준 Top 5</div>
-                </div>
-                <div className="space-y-3">
-                  {(() => {
-                    const rows = [
-                      { from: 'NG',  to: 'OK',  count: 3891 },
-                      { from: 'OK',  to: 'NG',  count: 1204 },
-                      { from: 'NG',  to: 'UNK', count:  456 },
-                      { from: 'UNK', to: 'NG',  count:  312 },
-                      { from: 'OK',  to: 'UNK', count:  198 },
-                    ];
-                    const max = rows[0].count;
-                    return rows.map((t, i) => (
-                      <div key={i}>
-                        <div className="flex items-baseline justify-between mb-1.5">
-                          <div className="flex items-center gap-1.5 mono text-[11px]">
-                            <span style={{ color: 'var(--text-tertiary)' }}>{t.from}</span>
-                            <span style={{ color: 'var(--border-strong)' }}>→</span>
-                            <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{t.to}</span>
-                          </div>
-                          <div className="tnum mono text-[11px]" style={{ color: 'var(--text-secondary)' }}>{t.count.toLocaleString()} 건</div>
-                        </div>
-                        <div className="h-[4px] rounded-full overflow-hidden" style={{ background: 'var(--border)' }}>
-                          <div className="h-full rounded-full" style={{ width: `${(t.count / max) * 100}%`, background: i === 0 ? 'var(--accent)' : 'var(--border-strong)' }}></div>
-                        </div>
-                      </div>
-                    ));
-                  })()}
-                </div>
-              </div>
-            </div>
-
-            {/* Sample case rows */}
-            <div className="mt-5 rounded-[8px] p-4" style={{ background: 'var(--soft)', border: '1px solid var(--border)' }}>
-              <div className="flex items-center justify-between mb-3">
-                <div className="text-[12.5px] font-semibold" style={{ color: 'var(--text-primary)' }}>건별 추적 샘플</div>
-                <div className="mono text-[10.5px]" style={{ color: 'var(--text-tertiary)' }}>이미지 경로 매칭 결과</div>
-              </div>
-              <div className="overflow-x-auto">
-                <table className="w-full text-[11.5px]" style={{ color: 'var(--text-primary)' }}>
-                  <thead>
-                    <tr style={{ color: 'var(--text-tertiary)' }}>
-                      <th className="text-left py-2 px-2 mono uppercase tracking-[0.06em] text-[10px] font-normal">Image Path</th>
-                      <th className="text-left py-2 px-2 mono uppercase tracking-[0.06em] text-[10px] font-normal">Before</th>
-                      <th className="text-left py-2 px-2 mono uppercase tracking-[0.06em] text-[10px] font-normal">After</th>
-                      <th className="text-left py-2 px-2 mono uppercase tracking-[0.06em] text-[10px] font-normal">AICodeName</th>
-                      <th className="text-left py-2 px-2 mono uppercase tracking-[0.06em] text-[10px] font-normal">Δ</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {[
-                      { path: '/AFVI/MX-218/2025-11-04/img-018721.tif', b: 'NG',  a: 'OK',  code: 'Particle → Particle', delta: '개선' },
-                      { path: '/AFVI/MX-218/2025-11-04/img-018992.tif', b: 'OK',  a: 'NG',  code: 'OK → Peeloff',         delta: '리스크' },
-                      { path: '/AFVI/MX-219/2025-11-04/img-019104.tif', b: 'NG',  a: 'OK',  code: 'Open → OK',            delta: '개선' },
-                      { path: '/AFVI/MX-220/2025-11-04/img-019288.tif', b: 'UNK', a: 'NG',  code: 'UNK → Peeloff',        delta: '경계' },
-                    ].map((r, i) => (
-                      <tr key={i} style={{ borderTop: '1px solid var(--border)' }}>
-                        <td className="py-2 px-2 mono text-[11px]" style={{ color: 'var(--text-secondary)' }}>{r.path}</td>
-                        <td className="py-2 px-2 mono" style={{ color: 'var(--text-tertiary)' }}>{r.b}</td>
-                        <td className="py-2 px-2 mono" style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{r.a}</td>
-                        <td className="py-2 px-2" style={{ color: 'var(--text-secondary)' }}>{r.code}</td>
-                        <td className="py-2 px-2 mono text-[10.5px]" style={{ color: r.delta === '개선' ? 'var(--accent)' : 'var(--text-tertiary)' }}>{r.delta}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Footer caption */}
-      <div className="px-6 py-4" style={{ borderTop: '1px solid var(--border)' }}>
-        <p className="text-[13px] leading-[1.7]" style={{ textWrap: 'pretty', color: 'var(--text-secondary)' }}>
-          모델 배포 전 성능 변화 사전 검증 체계 확보 → 수작업 분석 대비 리드타임 단축, 분석 기준 일관성 확보, 팀 내 분석 업무 표준화 기여.
-        </p>
-        <p className="mt-2 text-[12.5px] leading-[1.6]" style={{ textWrap: 'pretty', color: 'var(--text-tertiary)' }}>
-          Claude를 코드 생성 도구가 아닌 <span style={{ color: 'var(--accent)' }}>분석 설계 파트너</span>로 활용 — PCB 검사 도메인 지식을 프롬프트에 반영할 때 자동화 가치가 극대화됨.
-        </p>
-      </div>
-    </div>
-  );
-}
-
-/* ===== Featured Project 2 — InterX ===== */
-function ProjectInterX() {
-  const roles = [
-    { title: 'AI 판정 성능·로직 고도화',    desc: '과검·미검 원인 분석 및 판정 로직 설계' },
-    { title: '학습 데이터 품질 관리',       desc: '불량 유형별 데이터 정제 및 클래스 개선' },
-    { title: '분석 자동화·효율 개선',       desc: 'Python 기반 로그 분석 자동화로 분석 리드타임 단축' },
-    { title: '기술 커뮤니케이션·협업',      desc: 'R&D 협업을 통한 모델 개선 사이클 운영' },
-  ];
-  return (
-    <section className="py-24 md:py-32" style={{ borderTop: '1px solid var(--border)' }}>
-      <div className="max-w-[1180px] mx-auto px-6 md:px-10">
-        <div className="mono text-[11px] uppercase tracking-[0.12em] mb-6" style={{ color: 'var(--text-tertiary)' }}>Featured Project · 02</div>
-        <h2 className="text-[28px] md:text-[42px] font-semibold tracking-[-0.025em] leading-[1.15]" style={{ color: 'var(--text-primary)' }}>
-          심텍 Vision AI PCB 검사 모델 개선
-        </h2>
-        <p className="mt-4 text-[16px] md:text-[18px] max-w-[820px]" style={{ textWrap: 'pretty', color: 'var(--text-secondary)' }}>
-          딥러닝 기반 검사 모델의 오분류를 데이터·로직 양면에서 개선,
-          그리고 AI를 분석 파트너로 삼아 검증 자동화까지 구축.
-        </p>
-        <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 mono text-[12px]" style={{ color: 'var(--text-tertiary)' }}>
-          <span>인터엑스 · AI Consultant</span>
-          <span style={{ color: 'var(--border-strong)' }}>·</span>
-          <span className="tnum">2024.09 — 2026.01</span>
-        </div>
-
-        <RoleSection items={roles} />
-
-        {/* Sub Project 1 — 단독 담당: AI 판정 전환 분석기 */}
-        <div className="mt-16 md:mt-24">
-          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-3">
-            <span className="mono text-[11px] uppercase tracking-[0.12em] font-medium" style={{ color: 'var(--text-primary)' }}>01 · 단독 담당</span>
-            <span style={{ color: 'var(--border-strong)' }}>/</span>
-            <span className="mono text-[11px] uppercase tracking-[0.12em]" style={{ color: 'var(--text-tertiary)' }}>Sub Project 1</span>
-          </div>
-          <h3 className="text-[22px] md:text-[28px] font-semibold tracking-[-0.02em]" style={{ color: 'var(--text-primary)' }}>AI 판정 전환 분석기</h3>
-          <p className="mt-3 text-[15px] md:text-[16px] max-w-[820px]" style={{ textWrap: 'pretty', color: 'var(--text-secondary)' }}>
-            모델 배포 전 성능 변화를 자동 비교·검증하는 분석 도구
-          </p>
-          <div className="mt-10">
-            <AnalysisMiniPreview />
-          </div>
-        </div>
-
-        {/* Sub Project 2 — 공동 담당: PCB 검사 모델 개선 */}
-        <div className="mt-20 md:mt-28">
-          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-3">
-            <span className="mono text-[11px] uppercase tracking-[0.12em] font-medium" style={{ color: 'var(--text-primary)' }}>02 · 공동 담당</span>
-            <span style={{ color: 'var(--border-strong)' }}>/</span>
-            <span className="mono text-[11px] uppercase tracking-[0.12em]" style={{ color: 'var(--text-tertiary)' }}>Sub Project 2</span>
-          </div>
-          <h3 className="text-[22px] md:text-[28px] font-semibold tracking-[-0.02em]" style={{ color: 'var(--text-primary)' }}>PCB 검사 모델 로직 · 데이터 전략 개선</h3>
-          <p className="mt-3 text-[15px] md:text-[16px] max-w-[820px]" style={{ textWrap: 'pretty', color: 'var(--text-secondary)' }}>
-            오분류 원인 분석과 전략적 데이터 수집으로 OK Rate 10.38%p 개선·데이터셋 33.5% 확장 — R&D팀과 공동 작업.
-          </p>
-
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-3">
-            <div className="card-hover rounded-[12px] p-7 md:p-8" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
-              <div className="mono text-[11px] uppercase tracking-[0.12em]" style={{ color: 'var(--text-tertiary)' }}>성과 · 모델 로직 개선</div>
-              <div className="mt-6 flex items-baseline gap-3 tnum">
-                <span className="text-[44px] md:text-[56px] font-semibold tracking-[-0.03em] leading-none" style={{ color: 'var(--accent)' }}>+10.38</span>
-                <span className="text-[16px] mono" style={{ color: 'var(--text-secondary)' }}>%p</span>
-              </div>
-              <div className="mt-3 mono text-[13px] tnum" style={{ color: 'var(--text-secondary)' }}>OK Rate · 62.21% → 72.59%</div>
-              <p className="mt-6 text-[14.5px] leading-[1.7]" style={{ textWrap: 'pretty', color: 'var(--text-primary)' }}>
-                Mono 이미지 검사에서 Peeloff(치명 불량)와 이물질(양품)이 형태가 유사해 오분류되는 문제.<br/>
-                단일 임계값 적용 → 한계 발견 → 근본 원인 분석 → 조명별 차등 임계값(PSR/PAD) 적용으로 Peeloff 미검과 이물질 과검을 동시에 감소.
-              </p>
-              <div className="mt-6 pt-5 flex flex-wrap gap-2" style={{ borderTop: '1px solid var(--border)' }}>
-                <span className="kw-chip">Otsu Gray Value</span>
-                <span className="kw-chip">조명별 차등 임계값</span>
-                <span className="kw-chip">단계적 가설 검증</span>
-              </div>
-            </div>
-
-            <div className="card-hover rounded-[12px] p-7 md:p-8" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
-              <div className="mono text-[11px] uppercase tracking-[0.12em]" style={{ color: 'var(--text-tertiary)' }}>성과 · 데이터 전략</div>
-              <div className="mt-6 flex items-baseline gap-3 tnum">
-                <span className="text-[44px] md:text-[56px] font-semibold tracking-[-0.03em] leading-none" style={{ color: 'var(--accent)' }}>+33.5</span>
-                <span className="text-[16px] mono" style={{ color: 'var(--text-secondary)' }}>% 확장</span>
-              </div>
-              <div className="mt-3 mono text-[13px] tnum" style={{ color: 'var(--text-secondary)' }}>데이터셋 · 109,351건 → 145,984건 (2025.02 → 12)</div>
-              <p className="mt-6 text-[14.5px] leading-[1.7]" style={{ textWrap: 'pretty', color: 'var(--text-primary)' }}>
-                무작위 데이터 수집의 비효율을 끊고, 과검·미검 이미지의 오분류 패턴 분석을 통해 개선 우선순위 결함 유형을 선별.<br/>
-                현장 엔지니어와 협업해 타깃 결함 유형 중심의 전략적 수집 프로세스를 구축하고 희소 클래스 데이터를 확보.
-              </p>
-              <div className="mt-6 pt-5 flex flex-wrap gap-2" style={{ borderTop: '1px solid var(--border)' }}>
-                <span className="kw-chip">희소 클래스 확보</span>
-                <span className="kw-chip">모델-데이터 형상 관리</span>
-                <span className="kw-chip">현장 협업</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <blockquote className="mt-12 md:mt-16 quote-accent max-w-[820px]">
-          <p className="text-[18px] md:text-[20px] leading-[1.6] font-medium tracking-[-0.01em]" style={{ textWrap: 'pretty', color: 'var(--text-primary)' }}>
-            "단일 임계값 → 한계 → 근본 원인 분석 → 조명별 차등 적용. 때로는 솔루션의 실패가 더 본질적인 문제를 드러낸다."
-          </p>
-        </blockquote>
-      </div>
-    </section>
-  );
-}
-
-/* ===== Featured Project 3 — NHN ===== */
-function ProjectNHN() {
-  const roles = [
-    { title: '기술 지원 · CS 운영',         desc: '클라우드 인프라·티켓 예매 서비스의 사용자 문의 1차 대응 및 처리' },
-    { title: 'VOC 분석 · 인사이트 도출',    desc: '상담 로그 정밀 분석으로 사용자 Pain Point 발굴 및 개선 의제 제안' },
-    { title: 'CS 지식 베이스 구축',         desc: '상담 사례 정리·표준화로 KB 보완 — 신규 직원 온보딩 시간 단축' },
-    { title: '위기 대응 프로세스 설계',     desc: '대규모 장애·외부 이슈 대응 매뉴얼 표준화 및 시범 운영 검증' },
-  ];
-  const miniCases = [
-    { title: '코로나19 확진자 티켓 취소 매뉴얼', body: '위기 시 정책 설계로 처리 시간 단축, 부정 취소 감소.\n증빙 기준 표준화 + 전담 팀 운영 + 시범 운영을 통한 검증.' },
-    { title: '저성과 직원 코칭',                body: '상담 로그·이력 정밀 분석으로 근본 원인 파악(기술 용어 이해 부족) → 지식 베이스 보완 + 1:1 코칭으로 팀 생산성 개선.' },
-  ];
-  return (
-    <section className="py-24 md:py-32" style={{ borderTop: '1px solid var(--border)' }}>
-      <div className="max-w-[1180px] mx-auto px-6 md:px-10">
-        <div className="mono text-[11px] uppercase tracking-[0.12em] mb-6" style={{ color: 'var(--text-tertiary)' }}>Featured Project · 03</div>
-        <h2 className="text-[28px] md:text-[42px] font-semibold tracking-[-0.025em] leading-[1.15]" style={{ color: 'var(--text-primary)' }}>
-          Customer Service
-        </h2>
-        <p className="mt-4 text-[16px] md:text-[18px] max-w-[820px]" style={{ textWrap: 'pretty', color: 'var(--text-secondary)' }}>
-          NHN Cloud · 티켓링크의 CS 운영을 6년 담당.<br/>
-          사용자가 무엇에 어디서 막히는지를 가장 가까이서 들어온 시간 — Pain Point를 데이터·구조로 환원하는 사고의 토대.
-        </p>
-        <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 mono text-[12px]" style={{ color: 'var(--text-tertiary)' }}>
-          <span>NHN Service · Customer Service</span>
-          <span style={{ color: 'var(--border-strong)' }}>·</span>
-          <span className="tnum">2018.02 — 2024.02</span>
-        </div>
-
-        <RoleSection items={roles} />
-
-        <div className="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-2 gap-3">
-          {miniCases.map((c, i) => (
-            <div key={i} className="card-hover rounded-[12px] p-7 md:p-8" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
-              <div className="mono text-[11px] uppercase tracking-[0.12em] mb-3" style={{ color: 'var(--text-tertiary)' }}>Mini Case · 0{i+1}</div>
-              <div className="text-[16px] md:text-[18px] font-semibold tracking-[-0.01em]" style={{ color: 'var(--text-primary)' }}>{c.title}</div>
-              <p className="mt-3 text-[14.5px] leading-[1.7]" style={{ textWrap: 'pretty', color: 'var(--text-secondary)', whiteSpace: 'pre-line' }}>{c.body}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ===== Skills ===== */
-function Skills() {
-  const groups = [
-    { label: 'AI / LLM',        items: ['Prompt Engineering', 'Agent Workflow Design', 'ML/DL Workflow', 'AI-Native'] },
-    { label: 'Data & Analysis', items: ['Python', 'SQL', 'Pandas', 'Data Analysis'] },
-    { label: 'Tools',           items: ['Claude Code', 'Cursor', 'Antigravity', 'Notion'] },
-    { label: 'Foundation',      items: ['Java', 'Spring', 'JavaScript'] },
-  ];
-  return (
-    <section className="py-24 md:py-32" style={{ borderTop: '1px solid var(--border)' }}>
-      <div className="max-w-[1180px] mx-auto px-6 md:px-10">
-        <div className="mono text-[11px] uppercase tracking-[0.12em] mb-6" style={{ color: 'var(--text-tertiary)' }}>Skills</div>
-        <h2 className="text-[28px] md:text-[36px] font-semibold tracking-[-0.02em] mb-12" style={{ color: 'var(--text-primary)' }}>Stack</h2>
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-y-10 md:gap-y-12 gap-x-10">
-          {groups.map((g) => (
-            <div key={g.label} className="md:col-span-3">
-              <div className="mono text-[11px] uppercase tracking-[0.12em] mb-4" style={{ color: 'var(--text-tertiary)' }}>{g.label}</div>
-              <ul className="space-y-2">
-                {g.items.map((it) => <li key={it} className="text-[15px]" style={{ color: 'var(--text-primary)' }}>{it}</li>)}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ===== Contact ===== */
-function Contact() {
-  return (
-    <section id="contact" className="py-24 md:py-32" style={{ borderTop: '1px solid var(--border)' }}>
-      <div className="max-w-[1180px] mx-auto px-6 md:px-10">
-        <div className="mono text-[11px] uppercase tracking-[0.12em] mb-6" style={{ color: 'var(--text-tertiary)' }}>Contact</div>
-        <h2 className="text-[28px] md:text-[44px] font-semibold tracking-[-0.025em] leading-[1.2] max-w-[860px]" style={{ textWrap: 'pretty', color: 'var(--text-primary)' }}>
-          AI가 풀 수 있는 문제와 사람이 결정해야 할 가치 — 그 경계에서 해답을 찾고 싶습니다.
-        </h2>
-        <dl className="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-12 gap-y-8 gap-x-10 max-w-[820px]">
-          <div className="md:col-span-4">
-            <dt className="mono text-[11px] uppercase tracking-[0.12em] mb-2" style={{ color: 'var(--text-tertiary)' }}>Email</dt>
-            <dd>
-              <a href="mailto:zieonsim@gmail.com" className="text-[16px] md:text-[17px] transition-colors duration-200 underline-offset-4 hover:underline tnum"
-                 style={{ color: 'var(--text-primary)' }}
-                 onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent)')}
-                 onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}>
-                zieonsim@gmail.com
-              </a>
-            </dd>
-          </div>
-          <div className="md:col-span-4">
-            <dt className="mono text-[11px] uppercase tracking-[0.12em] mb-2" style={{ color: 'var(--text-tertiary)' }}>Phone</dt>
-            <dd className="text-[16px] md:text-[17px] tnum" style={{ color: 'var(--text-primary)' }}>010-8549-5209</dd>
-          </div>
-          <div className="md:col-span-4">
-            <dt className="mono text-[11px] uppercase tracking-[0.12em] mb-2" style={{ color: 'var(--text-tertiary)' }}>Location</dt>
-            <dd className="text-[16px] md:text-[17px]" style={{ color: 'var(--text-primary)' }}>Seoul</dd>
-          </div>
-        </dl>
-      </div>
-    </section>
-  );
-}
-
-function Footer() {
-  return (
-    <footer className="py-10" style={{ borderTop: '1px solid var(--border)' }}>
-      <div className="max-w-[1180px] mx-auto px-6 md:px-10 flex flex-wrap items-center justify-between gap-3">
-        <div className="mono text-[12px]" style={{ color: 'var(--text-tertiary)' }}>© 2026 Jieon Sim</div>
-        <div className="mono text-[11px] tnum" style={{ color: 'var(--text-tertiary)' }}>Built with Claude</div>
-      </div>
-    </footer>
-  );
-}
-
-function App() {
-  return (
-    <div className="min-h-screen" style={{ background: 'var(--bg)' }}>
-      <TopNav />
-      <main>
-        <Hero />
-        <About />
-        <Career />
-        <ProjectHana />
-        <ProjectInterX />
-        <ProjectNHN />
-        <Skills />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
-  );
-}
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
-</script>
+<script type="text/babel" data-presets="react" src="components/foundations.jsx"></script>
+<script type="text/babel" data-presets="react" src="components/sections.jsx"></script>
+<script type="text/babel" data-presets="react" src="components/projects.jsx"></script>
+<script type="text/babel" data-presets="react" src="components/app.jsx"></script>
 
 </body>
 </html>

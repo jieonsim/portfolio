@@ -442,7 +442,7 @@ function ProjectHana() {
                 </div>
 
                 <p className="text-[12.5px] leading-[1.7]" style={{ textWrap: 'pretty', color: 'var(--text-tertiary)' }}>
-                  영역별 비중을 반영한 가중 평균 보존율 모델 → 단순 평균이 아닌 문서 품질에 대한 객관적 근거 확보. 카테고리·패턴 단위 정량 지표로 후속 개선 액션(용어집 구축·2-pass 전처리 규칙) 도출.
+                  영역별 비중을 반영한 가중 평균 보존율 → 단순 평균이 아닌 문서 품질에 대한 객관적 근거 확보. 카테고리·패턴 단위 정량 지표로 후속 개선 액션(용어집 구축·2-pass 전처리 규칙) 도출.
                 </p>
               </div>
             }
@@ -496,36 +496,66 @@ function AnalysisMiniPreview() {
         </div>
       </div>
 
+      <div className="px-6 pt-7">
+        <div className="rounded-[12px] p-5 md:p-6 flex flex-col md:flex-row md:items-start gap-4 md:gap-5"
+             style={{ background: 'var(--bg-warm)', border: '1px solid var(--accent)' }}>
+          <div className="shrink-0 inline-flex items-center gap-2 px-3 py-1.5 rounded-full mono text-[10.5px] uppercase tracking-[0.14em]"
+               style={{ background: 'var(--accent)', color: '#fff' }}>
+            <span style={{ display: 'inline-block', width: 6, height: 6, borderRadius: 9999, background: '#fff' }}></span>
+            AI as Partner
+          </div>
+          <div className="flex-1">
+            <p className="text-[13.5px] md:text-[14px] leading-[1.75]" style={{ textWrap: 'pretty', color: 'var(--text-primary)' }}>
+              Claude를 코드 생성 도구가 아닌 <strong style={{ color: 'var(--accent)', fontWeight: 700 }}>분석 설계 파트너</strong>로 활용.
+              PCB 검사 도메인 지식을 프롬프트에 반영할 때 자동화 가치가 극대화됨.
+            </p>
+            <p className="mt-2 text-[12.5px] leading-[1.7]" style={{ textWrap: 'pretty', color: 'var(--text-secondary)' }}>
+              모델 배포 전 성능 변화 사전 검증 체계 확보 → 수작업 분석 대비 리드타임 단축, 분석 기준 일관성 확보, 팀 내 분석 업무 표준화 기여.
+            </p>
+          </div>
+        </div>
+      </div>
+
       <div className="px-6 pt-7 pb-6">
         <div className="flex items-center justify-between mb-4 gap-3">
           <div className="section-eyebrow">Output · 재구성 예시</div>
           <div className="mono text-[10px]" style={{ color: 'var(--text-tertiary)' }}>※ 포트폴리오용 샘플</div>
         </div>
 
-        <div className="rounded-[12px] overflow-hidden" style={{ border: '1px solid var(--border)' }}>
-          <div className="px-3 py-2 flex items-center gap-2" style={{ borderBottom: '1px solid var(--border)', background: 'var(--soft)' }}>
+        <div className="rounded-[12px] overflow-hidden" style={{
+          border: '1px solid #C9D2C9',
+          background: '#EEF1ED',
+          ['--d-card']: '#FFFFFF',
+          ['--d-soft']: '#E2E7E0',
+          ['--d-border']: '#C9D2C9',
+          ['--d-divider']: '#DDE3DA',
+          ['--d-text']: '#243029',
+          ['--d-text-2']: '#5A6B5F',
+          ['--d-text-3']: '#8A988C',
+        }}>
+          <div className="px-3 py-2 flex items-center gap-2" style={{ borderBottom: '1px solid var(--d-divider)', background: '#E2E7E0' }}>
             <span className="block w-2 h-2 rounded-full" style={{ background: '#E8A48E' }}></span>
             <span className="block w-2 h-2 rounded-full" style={{ background: '#E8C77E' }}></span>
             <span className="block w-2 h-2 rounded-full" style={{ background: '#9DC59C' }}></span>
-            <span className="ml-3 mono text-[10.5px]" style={{ color: 'var(--text-tertiary)' }}>analyzer.local · transition-dashboard</span>
+            <span className="ml-3 mono text-[10.5px]" style={{ color: 'var(--d-text-3)' }}>analyzer.local · transition-dashboard</span>
           </div>
 
-          <div className="px-5 py-3 flex flex-wrap items-center justify-between gap-3" style={{ borderBottom: '1px solid var(--border)', background: 'var(--bg)' }}>
-            <div className="flex items-center gap-2 mono text-[10.5px]" style={{ color: 'var(--text-tertiary)' }}>
+          <div className="px-5 py-3 flex flex-wrap items-center justify-between gap-3" style={{ borderBottom: '1px solid var(--d-divider)', background: '#F2F5F0' }}>
+            <div className="flex items-center gap-2 mono text-[10.5px]" style={{ color: 'var(--d-text-3)' }}>
               <span>Workspace</span>
-              <span style={{ color: 'var(--border-strong)' }}>/</span>
+              <span style={{ color: 'var(--d-border)' }}>/</span>
               <span>ATI55 · DME · 리드미 에칭</span>
-              <span style={{ color: 'var(--border-strong)' }}>/</span>
-              <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>Transition Analysis</span>
+              <span style={{ color: 'var(--d-border)' }}>/</span>
+              <span style={{ color: 'var(--d-text)', fontWeight: 600 }}>Transition Analysis</span>
             </div>
-            <div className="flex items-center gap-2 mono text-[10.5px]" style={{ color: 'var(--text-tertiary)' }}>
+            <div className="flex items-center gap-2 mono text-[10.5px]" style={{ color: 'var(--d-text-3)' }}>
               <span>v2.4</span>
               <span style={{ color: 'var(--accent)' }}>→</span>
               <span>v2.5</span>
             </div>
           </div>
 
-          <div className="p-5" style={{ background: 'var(--surface)' }}>
+          <div className="p-5" style={{ background: '#EEF1ED' }}>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {[
                 { lbl: 'Total · 처리 대상',    val: '248,719', sub: '건' },
@@ -533,28 +563,28 @@ function AnalysisMiniPreview() {
                 { lbl: 'Improved · NG → OK',  val: '+3.6',    sub: '%p', accent: true },
                 { lbl: 'Risk · OK → NG',      val: '−4.1',    sub: '%p' },
               ].map((k, i) => (
-                <div key={i} className="rounded-[10px] p-4" style={{ background: 'var(--soft)', border: '1px solid var(--border)' }}>
-                  <div className="mono text-[10px] uppercase tracking-[0.08em]" style={{ color: 'var(--text-tertiary)' }}>{k.lbl}</div>
+                <div key={i} className="rounded-[10px] p-4" style={{ background: 'var(--d-card)', border: '1px solid var(--d-border)' }}>
+                  <div className="mono text-[10px] uppercase tracking-[0.08em]" style={{ color: 'var(--d-text-3)' }}>{k.lbl}</div>
                   <div className="mt-2 flex items-baseline gap-1 tnum">
-                    <span className="text-[24px] font-semibold tracking-[-0.02em] leading-none" style={{ color: k.accent ? 'var(--accent)' : 'var(--text-primary)' }}>{k.val}</span>
-                    <span className="text-[12px] mono" style={{ color: 'var(--text-secondary)' }}>{k.sub}</span>
+                    <span className="text-[24px] font-semibold tracking-[-0.02em] leading-none" style={{ color: k.accent ? '#4A6B5C' : 'var(--d-text)' }}>{k.val}</span>
+                    <span className="text-[12px] mono" style={{ color: 'var(--d-text-2)' }}>{k.sub}</span>
                   </div>
                 </div>
               ))}
             </div>
 
             <div className="mt-5 grid grid-cols-1 md:grid-cols-12 gap-4">
-              <div className="md:col-span-7 rounded-[10px] p-4" style={{ background: 'var(--soft)', border: '1px solid var(--border)' }}>
+              <div className="md:col-span-7 rounded-[10px] p-4" style={{ background: 'var(--d-card)', border: '1px solid var(--d-border)' }}>
                 <div className="flex items-center justify-between mb-3">
-                  <div className="text-[12.5px] font-semibold" style={{ color: 'var(--text-primary)' }}>전환 매트릭스</div>
-                  <div className="mono text-[10.5px]" style={{ color: 'var(--text-tertiary)' }}>Before × After · 비율(%)</div>
+                  <div className="text-[12.5px] font-semibold" style={{ color: 'var(--d-text)' }}>전환 매트릭스</div>
+                  <div className="mono text-[10.5px]" style={{ color: 'var(--d-text-3)' }}>Before × After · 비율(%)</div>
                 </div>
                 <div>
                   <div className="flex">
                     <div className="w-20 shrink-0"></div>
                     <div className="grid grid-cols-3 gap-2 flex-1">
                       {['OK', 'NG', 'UNK'].map(l => (
-                        <div key={l} className="text-center mono text-[10.5px] uppercase tracking-[0.06em]" style={{ color: 'var(--text-tertiary)' }}>After · {l}</div>
+                        <div key={l} className="text-center mono text-[10.5px] uppercase tracking-[0.06em]" style={{ color: 'var(--d-text-3)' }}>After · {l}</div>
                       ))}
                     </div>
                   </div>
@@ -565,18 +595,18 @@ function AnalysisMiniPreview() {
                   ].map((r, ri) => (
                     <div key={r.row} className="flex items-stretch mt-2">
                       <div className="w-20 shrink-0 flex items-center">
-                        <span className="mono text-[10.5px] uppercase tracking-[0.06em]" style={{ color: 'var(--text-tertiary)' }}>Before · {r.row}</span>
+                        <span className="mono text-[10.5px] uppercase tracking-[0.06em]" style={{ color: 'var(--d-text-3)' }}>Before · {r.row}</span>
                       </div>
                       <div className="grid grid-cols-3 gap-2 flex-1">
                         {r.vals.map((v, ci) => {
                           const isDiag = ri === ci;
                           const t = Math.min(v / 65, 1);
                           const bg = isDiag
-                            ? `rgba(28,27,26,${0.10 + t * 0.78})`
-                            : `rgba(125,111,90,${0.05 + t * 0.30})`;
+                            ? `rgba(74,107,92,${0.06 + t * 0.74})`
+                            : `rgba(125,148,130,${0.04 + t * 0.18})`;
                           return (
                             <div key={ci} className="rounded-[6px] h-11 flex items-center justify-center"
-                                 style={{ background: bg, color: isDiag && t > 0.4 ? '#fff' : 'var(--text-primary)', border: '1px solid var(--border)' }}>
+                                 style={{ background: bg, color: isDiag && t > 0.4 ? '#fff' : 'var(--d-text)', border: '1px solid var(--d-border)' }}>
                               <span className="tnum mono text-[12px] font-medium">{v.toFixed(1)}%</span>
                             </div>
                           );
@@ -587,10 +617,10 @@ function AnalysisMiniPreview() {
                 </div>
               </div>
 
-              <div className="md:col-span-5 rounded-[10px] p-4" style={{ background: 'var(--soft)', border: '1px solid var(--border)' }}>
+              <div className="md:col-span-5 rounded-[10px] p-4" style={{ background: 'var(--d-card)', border: '1px solid var(--d-border)' }}>
                 <div className="flex items-center justify-between mb-3">
-                  <div className="text-[12.5px] font-semibold" style={{ color: 'var(--text-primary)' }}>주요 전환 패턴</div>
-                  <div className="mono text-[10.5px]" style={{ color: 'var(--text-tertiary)' }}>Top 5</div>
+                  <div className="text-[12.5px] font-semibold" style={{ color: 'var(--d-text)' }}>주요 전환 패턴</div>
+                  <div className="mono text-[10.5px]" style={{ color: 'var(--d-text-3)' }}>Top 5</div>
                 </div>
                 <div className="space-y-3">
                   {(() => {
@@ -606,14 +636,14 @@ function AnalysisMiniPreview() {
                       <div key={i}>
                         <div className="flex items-baseline justify-between mb-1.5">
                           <div className="flex items-center gap-1.5 mono text-[11px]">
-                            <span style={{ color: 'var(--text-tertiary)' }}>{t.from}</span>
-                            <span style={{ color: 'var(--border-strong)' }}>→</span>
-                            <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{t.to}</span>
+                            <span style={{ color: 'var(--d-text-3)' }}>{t.from}</span>
+                            <span style={{ color: 'var(--d-border)' }}>→</span>
+                            <span style={{ color: 'var(--d-text)', fontWeight: 600 }}>{t.to}</span>
                           </div>
-                          <div className="tnum mono text-[11px]" style={{ color: 'var(--text-secondary)' }}>{t.count.toLocaleString()} 건</div>
+                          <div className="tnum mono text-[11px]" style={{ color: 'var(--d-text-2)' }}>{t.count.toLocaleString()} 건</div>
                         </div>
-                        <div className="h-[5px] rounded-full overflow-hidden" style={{ background: 'var(--border)' }}>
-                          <div className="h-full rounded-full" style={{ width: `${(t.count / max) * 100}%`, background: i === 0 ? 'var(--accent)' : 'var(--border-strong)' }}></div>
+                        <div className="h-[5px] rounded-full overflow-hidden" style={{ background: 'var(--d-soft)' }}>
+                          <div className="h-full rounded-full" style={{ width: `${(t.count / max) * 100}%`, background: i === 0 ? '#4A6B5C' : 'var(--d-text-3)' }}></div>
                         </div>
                       </div>
                     ));
@@ -623,15 +653,15 @@ function AnalysisMiniPreview() {
             </div>
 
             {/* 건별 추적 샘플 */}
-            <div className="mt-5 rounded-[10px] p-4" style={{ background: 'var(--soft)', border: '1px solid var(--border)' }}>
+            <div className="mt-5 rounded-[10px] p-4" style={{ background: 'var(--d-card)', border: '1px solid var(--d-border)' }}>
               <div className="flex items-center justify-between mb-3">
-                <div className="text-[12.5px] font-semibold" style={{ color: 'var(--text-primary)' }}>건별 추적 샘플</div>
-                <div className="mono text-[10.5px]" style={{ color: 'var(--text-tertiary)' }}>이미지 경로 매칭 결과</div>
+                <div className="text-[12.5px] font-semibold" style={{ color: 'var(--d-text)' }}>건별 추적 샘플</div>
+                <div className="mono text-[10.5px]" style={{ color: 'var(--d-text-3)' }}>이미지 경로 매칭 결과</div>
               </div>
               <div style={{ overflowX: 'auto' }}>
-                <table className="w-full text-[11.5px]" style={{ color: 'var(--text-primary)', borderCollapse: 'collapse' }}>
+                <table className="w-full text-[11.5px]" style={{ color: 'var(--d-text)', borderCollapse: 'collapse' }}>
                   <thead>
-                    <tr style={{ color: 'var(--text-tertiary)' }}>
+                    <tr style={{ color: 'var(--d-text-3)' }}>
                       <th className="py-2 px-2 mono uppercase tracking-[0.06em] text-[10px]" style={{ textAlign: 'left', fontWeight: 400 }}>Image Path</th>
                       <th className="py-2 px-2 mono uppercase tracking-[0.06em] text-[10px]" style={{ textAlign: 'left', fontWeight: 400 }}>Before</th>
                       <th className="py-2 px-2 mono uppercase tracking-[0.06em] text-[10px]" style={{ textAlign: 'left', fontWeight: 400 }}>After</th>
@@ -646,12 +676,12 @@ function AnalysisMiniPreview() {
                       { path: '/AFVI/MX-219/2025-11-04/img-019104.tif', b: 'NG',  a: 'OK',  code: 'Open → Scratch',      delta: '개선' },
                       { path: '/AFVI/MX-220/2025-11-04/img-019288.tif', b: 'UNK', a: 'NG',  code: 'Short → Peeloff',     delta: '경계' },
                     ].map((r, i) => (
-                      <tr key={i} style={{ borderTop: '1px solid var(--border)' }}>
-                        <td className="py-2 px-2 mono text-[11px]" style={{ color: 'var(--text-secondary)' }}>{r.path}</td>
-                        <td className="py-2 px-2 mono" style={{ color: 'var(--text-tertiary)' }}>{r.b}</td>
-                        <td className="py-2 px-2 mono" style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{r.a}</td>
-                        <td className="py-2 px-2" style={{ color: 'var(--text-secondary)' }}>{r.code}</td>
-                        <td className="py-2 px-2 mono text-[10.5px]" style={{ color: r.delta === '개선' ? 'var(--accent)' : 'var(--text-tertiary)' }}>{r.delta}</td>
+                      <tr key={i} style={{ borderTop: '1px solid var(--d-divider)' }}>
+                        <td className="py-2 px-2 mono text-[11px]" style={{ color: 'var(--d-text-2)' }}>{r.path}</td>
+                        <td className="py-2 px-2 mono" style={{ color: 'var(--d-text-3)' }}>{r.b}</td>
+                        <td className="py-2 px-2 mono" style={{ color: 'var(--d-text)', fontWeight: 600 }}>{r.a}</td>
+                        <td className="py-2 px-2" style={{ color: 'var(--d-text-2)' }}>{r.code}</td>
+                        <td className="py-2 px-2 mono text-[10.5px]" style={{ color: r.delta === '개선' ? '#4A6B5C' : 'var(--d-text-3)' }}>{r.delta}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -662,13 +692,6 @@ function AnalysisMiniPreview() {
         </div>
       </div>
 
-      <div className="px-6 py-4" style={{ borderTop: '1px solid var(--border)' }}>
-        <p className="text-[13px] leading-[1.7]" style={{ textWrap: 'pretty', color: 'var(--text-secondary)' }}>
-          모델 배포 전 성능 변화 사전 검증 체계 확보 → 수작업 분석 대비 리드타임 단축, 분석 기준 일관성 확보, 팀 내 분석 업무 표준화 기여.
-          <br />
-          Claude를 코드 생성 도구가 아닌 <span style={{ color: 'var(--accent)' }}>분석 설계 파트너</span>로 활용 — PCB 검사 도메인 지식을 프롬프트에 반영할 때 자동화 가치가 극대화됨.
-        </p>
-      </div>
     </div>
   );
 }

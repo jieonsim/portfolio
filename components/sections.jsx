@@ -9,14 +9,11 @@ function Hero() {
       <div className="relative max-w-[1240px] mx-auto px-6 md:px-10">
         {/* Headline — full width */}
         <h1 className="font-semibold tracking-[-0.035em] leading-[1.04]" style={{ color: 'var(--text-primary)' }}>
-          <span className="line-up block text-[44px] sm:text-[64px] md:text-[84px] lg:text-[100px]" style={{ animationDelay: '180ms' }}>
-            CS가 AI를 만났을 때,
+          <span className="line-up block text-[40px] sm:text-[60px] md:text-[84px] lg:text-[100px]" style={{ animationDelay: '180ms' }}>
+            고객의 말에서
           </span>
-          <span className="line-up block text-[44px] sm:text-[64px] md:text-[84px] lg:text-[100px] accent-text" style={{ animationDelay: '320ms' }}>
-            사용자를 가장 잘 아는
-          </span>
-          <span className="line-up block text-[44px] sm:text-[64px] md:text-[84px] lg:text-[100px] mt-1" style={{ animationDelay: '460ms', color: 'var(--text-primary)' }}>
-            Problem Solver.
+          <span className="line-up block text-[40px] sm:text-[60px] md:text-[84px] lg:text-[100px]" style={{ animationDelay: '340ms' }}>
+            <span className="accent-text">모델의 답</span>까지.
           </span>
         </h1>
 

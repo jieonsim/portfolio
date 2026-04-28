@@ -1,346 +1,320 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Jieon Sim · Portfolio</title>
-<meta name="description" content="Jieon Sim — Prompt Engineer · Problem Solver. CS 6년의 사용자 이해를 AI Agent 기획·설계·구현으로 옮기는 사람." />
-<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231C1B1A'/><circle cx='16' cy='16' r='3' fill='white'/></svg>" />
+/* ===== Sections: Hero, About, Career, Skills, Contact, Footer ===== */
+const { useState: _useStateS, useEffect: _useEffectS } = React;
 
-<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+/* Hero — left big type, right meta card */
+function Hero() {
+  return (
+    <section id="top" className="relative pt-32 md:pt-40 pb-24 md:pb-32 overflow-hidden">
+      <div className="hero-grid"></div>
+      <div className="relative max-w-[1240px] mx-auto px-6 md:px-10">
+        {/* Headline — full width */}
+        <h1 className="font-semibold tracking-[-0.035em] leading-[1.04]" style={{ color: 'var(--text-primary)' }}>
+          <span className="line-up block text-[44px] sm:text-[64px] md:text-[84px] lg:text-[100px]" style={{ animationDelay: '180ms' }}>
+            CS가 AI를 만났을 때,
+          </span>
+          <span className="line-up block text-[44px] sm:text-[64px] md:text-[84px] lg:text-[100px] accent-text" style={{ animationDelay: '320ms' }}>
+            사용자를 가장 잘 아는
+          </span>
+          <span className="line-up block text-[44px] sm:text-[64px] md:text-[84px] lg:text-[100px] mt-1" style={{ animationDelay: '460ms', color: 'var(--text-primary)' }}>
+            Problem Solver.
+          </span>
+        </h1>
 
-<script src="https://cdn.tailwindcss.com/3.4.16"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        fontFamily: {
-          sans: ['Pretendard', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
-          mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
-        },
-      },
-    },
-  };
-</script>
+        {/* Sub-row: paragraph + CTA */}
+        <div className="mt-16 md:mt-20 max-w-[680px]">
+          <p className="line-up text-[15.5px] md:text-[16.5px] leading-[1.78]"
+             style={{ animationDelay: '700ms', textWrap: 'pretty', color: 'var(--text-secondary)' }}>
+            사용자가 어디에서 막히는지를 가장 가까이서 들어온 시간을 기반으로,
+            <br />
+            이제 그 이해를 AI Agent의 기획·설계·구현으로 직접 옮깁니다.
+            <br />
+            문제 정의부터 프로덕트 출시까지, 영역의 경계 없이 끝까지 책임집니다.
+          </p>
+          <div className="line-up mt-10 flex flex-wrap items-center gap-3" style={{ animationDelay: '900ms' }}>
+            <a href="#projects"
+               className="inline-flex items-center gap-2 px-5 py-3 rounded-full text-[13.5px] font-medium transition-all duration-200 hover:gap-3"
+               style={{ background: 'var(--text-primary)', color: '#fff' }}>
+              <span>Featured Projects</span>
+              <span aria-hidden="true">↓</span>
+            </a>
+            <a href="#contact"
+               className="inline-flex items-center gap-2 px-5 py-3 rounded-full text-[13.5px] font-medium transition-all duration-200"
+               style={{ border: '1px solid var(--border-strong)', color: 'var(--text-primary)' }}>
+              <span>Get in touch</span>
+              <span aria-hidden="true" style={{ color: 'var(--accent)' }}>→</span>
+            </a>
+          </div>
+        </div>
 
-<style>
-  :root {
-    --bg:        #FAF9F6;
-    --bg-warm:   #F4F2EC;
-    --surface:   #FFFFFF;
-    --soft:      #F4F2EC;
-    --softer:    #EFEDE5;
-    --border:        #E5E2D9;
-    --border-strong: #D4D0C3;
-    --text-primary:   #1A1917;
-    --text-secondary: #5E5A52;
-    --text-tertiary:  #9C9789;
-    --accent:      #7D6F5A;
-    --accent-soft: #EBE5D6;
-    --accent-ink:  #4F4534;
-    --accent-warm: #B89B6E;
-  }
-  * { box-sizing: border-box; }
-  html, body { background: var(--bg); color: var(--text-primary); }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'Pretendard', 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-    font-size: 16px;
-    line-height: 1.7;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    letter-spacing: -0.005em;
-    overflow-x: hidden;
-  }
-  .tnum { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
-  .mono { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace; }
-  .display { font-family: 'Pretendard', 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif; font-feature-settings: "ss01"; }
+        {/* Marquee-ish keyword strip */}
+        <div className="line-up mt-20 md:mt-28 pt-8 flex flex-wrap items-center gap-x-6 gap-y-2"
+             style={{ borderTop: '1px solid var(--border)', animationDelay: '1080ms' }}>
+          <span className="mono text-[10.5px] tracking-[0.18em] uppercase" style={{ color: 'var(--text-tertiary)' }}>
+            Keywords —
+          </span>
+          {['LLM Agent', 'Prompt Engineering', 'RAG', 'Data Quality', 'CS Insight', 'Problem Definition', 'AI-Native'].map((k, i, arr) => (
+            <span key={k} className="flex items-center gap-x-6">
+              <span className="text-[13px]" style={{ color: 'var(--text-primary)', fontWeight: 500 }}>{k}</span>
+              {i < arr.length - 1 && <span style={{ color: 'var(--border-strong)' }}>·</span>}
+            </span>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
-  /* ===== Animations ===== */
-  @keyframes lineUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  .line-up { opacity: 0; animation: lineUp 800ms cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+/* About */
+function About() {
+  const whoIAm = ['LLM Agent를 기획·설계·구현', 'AI 모델 성능 분석으로 서비스 개선', 'CS 6년, 사용자 Pain Point 발굴'];
+  const whyEssential = ['프롬프트 설계로 AI 응답 품질 통제', '데이터로 문제 정의·검증', '산출물로 기획 의도 명확화'];
+  return (
+    <section id="about" className="py-24 md:py-32 relative" style={{ borderTop: '1px solid var(--border)' }}>
+      <div className="max-w-[1240px] mx-auto px-6 md:px-10">
+        <div className="reveal flex items-baseline justify-between mb-14 md:mb-20">
+          <div className="flex items-center gap-5">
+            <span className="section-num">— 01</span>
+            <h2 className="text-[28px] md:text-[40px] font-semibold tracking-[-0.025em]" style={{ color: 'var(--text-primary)' }}>
+              About
+            </h2>
+          </div>
+          <span className="hidden md:inline mono text-[10.5px] tracking-[0.16em] uppercase" style={{ color: 'var(--text-tertiary)' }}>
+            Who · What · Why
+          </span>
+        </div>
 
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-  .fade-in { opacity: 0; animation: fadeIn 1200ms ease-out forwards; }
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-14">
+          <div className="md:col-span-5 reveal">
+            <div className="space-y-7">
+              <p className="text-[18px] md:text-[20px] leading-[1.7] font-medium tracking-[-0.005em]"
+                 style={{ textWrap: 'pretty', color: 'var(--text-primary)' }}>
+                <span className="accent-text">"</span>
+                에이전트 페르소나 기획부터 시나리오 로직 설계, 인터페이스 구현까지 — 제품의 시작과 끝을 직접 책임집니다.
+                <span className="accent-text">"</span>
+              </p>
+              <p className="text-[15px] md:text-[16px] leading-[1.78]" style={{ textWrap: 'pretty', color: 'var(--text-secondary)' }}>
+                테스트 데이터를 기획·로직 개선으로 되돌리는 선순환 구조를 직접 만들고, 기획자–엔지니어 사이의 정보 병목을 없애 가장 빠른 속도로 제품 진화를 가능하게 합니다.
+              </p>
+              <p className="text-[15px] md:text-[16px] leading-[1.78]" style={{ textWrap: 'pretty', color: 'var(--text-secondary)' }}>
+                기술적 실현 가능성과 비즈니스 가치를 동시에 고려하며, 사용자 이해를 코드와 데이터로 옮기는 일을 가장 잘합니다.
+              </p>
+            </div>
+          </div>
 
-  /* Scroll-reveal */
-  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 800ms cubic-bezier(0.22, 1, 0.36, 1), transform 800ms cubic-bezier(0.22, 1, 0.36, 1); }
-  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+          <div className="md:col-span-7 reveal" style={{ transitionDelay: '120ms' }}>
+            <div className="space-y-10">
+              <div>
+                <div className="section-eyebrow mb-5">Who I am</div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  {whoIAm.map((t, i) => (
+                    <div key={i} className="card-hover rounded-[12px] p-6"
+                         style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
+                      <div className="mono text-[11px] mb-3 tnum" style={{ color: 'var(--accent)' }}>0{i+1}</div>
+                      <div className="text-[14px] leading-[1.6]" style={{ textWrap: 'pretty', color: 'var(--text-primary)' }}>{t}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <div className="section-eyebrow mb-5">Why essential</div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  {whyEssential.map((t, i) => (
+                    <div key={i} className="card-hover rounded-[12px] p-6"
+                         style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
+                      <div className="mono text-[11px] mb-3 tnum" style={{ color: 'var(--accent)' }}>0{i+1}</div>
+                      <div className="text-[14px] leading-[1.6]" style={{ textWrap: 'pretty', color: 'var(--text-primary)' }}>{t}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
-  /* Hover */
-  .card-hover { transition: border-color 220ms ease-out, transform 220ms ease-out, box-shadow 220ms ease-out; }
-  .card-hover:hover { border-color: var(--accent); }
-  .lift-hover { transition: transform 240ms ease-out, border-color 240ms ease-out, box-shadow 240ms ease-out; }
-  .lift-hover:hover { transform: translateY(-2px); border-color: var(--accent); box-shadow: 0 8px 24px -16px rgba(28,27,26,0.18); }
+/* Career */
+function Career() {
+  const nodes = [
+    { period: '2018.02 — 2024.02', company: 'NHN Service',  role: 'Customer Service', tenure: '6년',     quote: '사용자가 무엇에 막히는지를 가장 가까이서 들어왔습니다' },
+    { period: '2024.09 — 2026.01', company: '인터엑스',     role: 'AI Consultant',    tenure: '1년 5개월', quote: 'AI 모델의 오분류를 데이터·로직으로 풀어내는 법을 익혔습니다' },
+    { period: '2026.01 — 재직 중', company: '포지큐브',     role: 'Prompt Engineer',  tenure: '4개월',    quote: 'AI Agent를 기획·설계·구현·검증까지 직접 책임집니다' },
+  ];
+  return (
+    <section id="career" className="py-24 md:py-32" style={{ borderTop: '1px solid var(--border)' }}>
+      <div className="max-w-[1240px] mx-auto px-6 md:px-10">
+        <div className="reveal flex items-baseline justify-between mb-14 md:mb-20">
+          <div className="flex items-center gap-5">
+            <span className="section-num">— 02</span>
+            <h2 className="text-[28px] md:text-[40px] font-semibold tracking-[-0.025em]" style={{ color: 'var(--text-primary)' }}>
+              <span>Career</span>{' '}
+              <span className="accent-text">— 7년 9개월의 궤적</span>
+            </h2>
+          </div>
+        </div>
 
-  /* ===== Hero grid backdrop ===== */
-  .hero-grid {
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(to right, rgba(125,111,90,0.06) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(125,111,90,0.06) 1px, transparent 1px);
-    background-size: 80px 80px;
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(0,0,0,0.7) 0%, transparent 80%);
-    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(0,0,0,0.7) 0%, transparent 80%);
-    pointer-events: none;
-  }
+        <div className="reveal relative">
+          <div className="absolute left-[7px] top-1 bottom-1 w-px" style={{ background: 'var(--border)' }} aria-hidden="true"></div>
+          <ul className="space-y-12 md:space-y-14">
+            {nodes.map((n, i) => (
+              <li key={i} className="relative pl-12 group">
+                <span className="absolute left-0 top-1.5 w-[15px] h-[15px] rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-125"
+                      style={{ border: '1px solid var(--border-strong)', background: 'var(--surface)' }}>
+                  <span className="block w-[5px] h-[5px] rounded-full transition-colors duration-200"
+                        style={{ background: i === nodes.length - 1 ? 'var(--accent)' : 'var(--text-tertiary)' }}></span>
+                </span>
+                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-3">
+                  <span className="mono text-[11.5px] tnum tracking-[0.04em]" style={{ color: 'var(--text-tertiary)' }}>{n.period}</span>
+                  <span style={{ color: 'var(--border-strong)' }}>·</span>
+                  <span className="text-[14px]" style={{ color: 'var(--text-secondary)' }}>{n.company}</span>
+                  <span style={{ color: 'var(--border-strong)' }}>·</span>
+                  <span className="text-[15.5px] font-semibold tracking-[-0.005em]" style={{ color: 'var(--text-primary)' }}>{n.role}</span>
+                  <span className="ml-2 mono text-[11px] px-2 py-0.5 rounded-full tnum"
+                        style={{ background: 'var(--soft)', color: 'var(--text-secondary)', border: '1px solid var(--border)' }}>{n.tenure}</span>
+                </div>
+                <p className="text-[15px] md:text-[16px] max-w-[680px]" style={{ textWrap: 'pretty', color: 'var(--text-secondary)', fontWeight: 300 }}>
+                  "{n.quote}"
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+}
 
-  /* ===== Section index (right rail) ===== */
-  .rail-link { display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 6px 0; }
-  .rail-line { display: block; width: 24px; height: 1px; background: var(--border-strong); transition: width 240ms ease, background 240ms ease; }
-  .rail-label { font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-tertiary); transition: color 240ms ease; }
-  .rail-link:hover .rail-line, .rail-link.active .rail-line { width: 36px; background: var(--accent); }
-  .rail-link:hover .rail-label, .rail-link.active .rail-label { color: var(--text-primary); }
-  .rail-link.active .rail-label { font-weight: 600; }
+/* Role grid */
+function RoleSection({ items }) {
+  return (
+    <div className="mt-12 reveal">
+      <div className="section-eyebrow mb-5">Role · 담당 역할</div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+        {items.map((r, i) => (
+          <div key={i} className="role-card">
+            <span className="role-num">/ 0{i+1}</span>
+            <div className="role-title">{r.title}</div>
+            <div className="role-sep"></div>
+            <div className="role-desc" style={{ textWrap: 'pretty' }}>{r.desc}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
-  /* ===== Workflow Diagram ===== */
-  .wf-node-inner {
-    width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
-    text-align: center;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 10px 12px;
-    transition: border-color 200ms ease-out;
-    line-height: 1.35;
-  }
-  .wf-node-inner:hover { border-color: var(--border-strong); }
-  .wf-node-inner.dark { background: var(--text-primary); color: #fff; border-color: var(--text-primary); }
-  .wf-title { font-weight: 600; font-size: 13px; color: var(--text-primary); }
-  .wf-sub   { font-size: 12px; color: var(--text-tertiary); }
+/* Skills */
+function Skills() {
+  const groups = [
+    { label: 'AI / LLM',        items: ['Prompt Engineering', 'Agent Workflow Design', 'ML/DL Workflow', 'AI-Native'] },
+    { label: 'Data & Analysis', items: ['Python', 'SQL', 'Pandas', 'Data Analysis'] },
+    { label: 'Tools',           items: ['Claude Code', 'Cursor', 'Antigravity', 'Notion'] },
+    { label: 'Foundation',      items: ['Java', 'Spring', 'JavaScript'] },
+  ];
+  return (
+    <section className="py-24 md:py-32" style={{ borderTop: '1px solid var(--border)' }}>
+      <div className="max-w-[1240px] mx-auto px-6 md:px-10">
+        <div className="reveal flex items-baseline justify-between mb-14">
+          <div className="flex items-center gap-5">
+            <span className="section-num">— 06</span>
+            <h2 className="text-[28px] md:text-[40px] font-semibold tracking-[-0.025em]" style={{ color: 'var(--text-primary)' }}>
+              <span>Skills</span>{' '}
+              <span className="accent-text">— Stack</span>
+            </h2>
+          </div>
+        </div>
+        <div className="reveal grid grid-cols-1 md:grid-cols-12 gap-y-10 md:gap-y-12 gap-x-10">
+          {groups.map((g) => (
+            <div key={g.label} className="md:col-span-3">
+              <div className="section-eyebrow mb-5">{g.label}</div>
+              <ul className="space-y-2.5">
+                {g.items.map((it) => (
+                  <li key={it} className="text-[15px] flex items-center gap-2.5" style={{ color: 'var(--text-primary)' }}>
+                    <span className="block w-1 h-1 rounded-full" style={{ background: 'var(--accent)' }}></span>
+                    {it}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
-  .quote-accent { border-left: 3px solid var(--accent); padding-left: 24px; }
+/* Contact */
+function Contact() {
+  return (
+    <section id="contact" className="py-24 md:py-36 relative overflow-hidden" style={{ borderTop: '1px solid var(--border)', background: 'var(--bg-warm)' }}>
+      <div className="absolute inset-0 pointer-events-none"
+           style={{ backgroundImage: 'radial-gradient(ellipse 60% 40% at 50% 100%, rgba(125,111,90,0.10) 0%, transparent 70%)' }}></div>
+      <div className="relative max-w-[1240px] mx-auto px-6 md:px-10">
+        <div className="reveal flex items-center gap-5 mb-10">
+          <span className="section-num">— 07</span>
+          <span className="section-eyebrow" style={{ paddingLeft: 0 }}>Let's work together</span>
+        </div>
+        <h2 className="reveal text-[34px] sm:text-[44px] md:text-[60px] font-semibold tracking-[-0.03em] leading-[1.1] max-w-[1000px]"
+            style={{ textWrap: 'pretty', color: 'var(--text-primary)' }}>
+          AI가 풀 수 있는 문제와{' '}
+          <span className="accent-text">사람이 결정해야 할 가치</span>{' '}
+          — 그 경계에서 해답을 찾고 싶습니다.
+        </h2>
 
-  .nav-scrolled {
-    background: rgba(250, 249, 246, 0.82);
-    backdrop-filter: saturate(140%) blur(12px);
-    -webkit-backdrop-filter: saturate(140%) blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
+        <div className="reveal mt-14 md:mt-16 grid grid-cols-1 md:grid-cols-12 gap-y-8 gap-x-6 max-w-[1000px]">
+          <a href="mailto:zieonsim@gmail.com"
+             className="md:col-span-6 group rounded-[16px] px-7 py-6 transition-all duration-200 flex flex-col justify-between"
+             style={{ background: 'var(--surface)', border: '1px solid var(--border)', minHeight: 116 }}
+             onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+             onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.transform = 'translateY(0)'; }}>
+            <div className="flex items-center justify-between">
+              <span className="mono text-[10.5px] tracking-[0.18em] uppercase" style={{ color: 'var(--text-tertiary)' }}>Email — primary</span>
+              <span aria-hidden="true" className="text-[20px] transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+                    style={{ color: 'var(--accent)' }}>↗</span>
+            </div>
+            <div className="text-[20px] md:text-[22px] font-semibold tnum tracking-[-0.01em]" style={{ color: 'var(--text-primary)' }}>
+              zieonsim@gmail.com
+            </div>
+          </a>
 
-  ::selection { background: var(--accent); color: #fff; }
-  section[id] { scroll-margin-top: 80px; }
-  details > summary { list-style: none; cursor: pointer; }
-  details > summary::-webkit-details-marker { display: none; }
+          <div className="md:col-span-3 rounded-[16px] px-7 py-6 flex flex-col justify-between"
+               style={{ background: 'var(--surface)', border: '1px solid var(--border)', minHeight: 116 }}>
+            <div className="mono text-[10.5px] tracking-[0.18em] uppercase" style={{ color: 'var(--text-tertiary)' }}>Phone</div>
+            <div className="text-[20px] md:text-[22px] font-semibold tnum tracking-[-0.005em]" style={{ color: 'var(--text-primary)' }}>
+              010-8549-5209
+            </div>
+          </div>
 
-  /* ===== Hero meta card ===== */
-  .meta-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 28px 28px 24px;
-    box-shadow: 0 1px 0 rgba(28,27,26,0.02), 0 12px 32px -24px rgba(28,27,26,0.18);
-  }
-  .meta-row {
-    display: grid;
-    grid-template-columns: 90px 1fr;
-    gap: 16px;
-    align-items: baseline;
-    padding: 14px 0;
-    border-top: 1px solid var(--border);
-  }
-  .meta-row:first-of-type { border-top: 0; padding-top: 0; }
-  .meta-label { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-tertiary); }
-  .meta-value { font-size: 14.5px; color: var(--text-primary); line-height: 1.55; }
+          <div className="md:col-span-3 rounded-[16px] px-7 py-6 flex flex-col justify-between"
+               style={{ background: 'var(--surface)', border: '1px solid var(--border)', minHeight: 116 }}>
+            <div className="mono text-[10.5px] tracking-[0.18em] uppercase" style={{ color: 'var(--text-tertiary)' }}>Location</div>
+            <div className="text-[20px] md:text-[22px] font-semibold tracking-[-0.005em]" style={{ color: 'var(--text-primary)' }}>
+              Seoul, KR
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
-  /* Section header */
-  .section-eyebrow {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--text-tertiary);
-  }
-  .section-eyebrow::before {
-    content: ''; display: inline-block; width: 24px; height: 1px; background: var(--accent);
-  }
-  .section-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; letter-spacing: 0.18em; color: var(--text-tertiary);
-    font-variant-numeric: tabular-nums;
-  }
+function Footer() {
+  return (
+    <footer className="py-12" style={{ background: 'var(--text-primary)', color: '#D4D0C3' }}>
+      <div className="max-w-[1240px] mx-auto px-6 md:px-10">
+        <div className="pt-6 flex flex-wrap items-center justify-between gap-3">
+          <div className="mono text-[11.5px] tnum" style={{ color: '#787367' }}>© 2026 Jieon Sim · All rights reserved</div>
+          <a href="#top" className="mono text-[11px] tracking-[0.18em] uppercase flex items-center gap-2 hover:text-white transition-colors"
+             style={{ color: '#9C9789' }}>
+            <span>Back to top</span>
+            <span aria-hidden="true">↑</span>
+          </a>
+        </div>
+      </div>
+    </footer>
+  );
+}
 
-  /* Case study */
-  .cs-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 500; font-size: 13px; letter-spacing: 0.18em;
-    line-height: 1; color: var(--accent); font-variant-numeric: tabular-nums;
-    display: block; margin-bottom: 12px;
-    text-transform: uppercase;
-  }
-  .cs-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 500; font-size: 10.5px; letter-spacing: 0.18em;
-    text-transform: uppercase; color: var(--text-tertiary);
-    display: block; margin-bottom: 22px;
-  }
-  .cs-approach {
-    font-size: 15.5px; line-height: 1.78; color: var(--text-primary);
-    max-width: 760px; text-wrap: pretty; white-space: pre-line;
-  }
-  .cs-result { display: flex; flex-direction: column; gap: 12px; }
-  .cs-result li {
-    font-size: 15px; line-height: 1.78; color: var(--text-primary);
-    display: flex; gap: 14px; align-items: flex-start;
-  }
-  .cs-result li::before {
-    content: ''; flex-shrink: 0; width: 5px; height: 5px;
-    margin-top: 11px; border-radius: 999px; background: var(--accent);
-  }
-
-  /* label/value rows */
-  .lv-row { display: grid; grid-template-columns: 130px 1fr; gap: 16px; align-items: baseline; padding: 10px 0; }
-  .lv-row + .lv-row { border-top: 1px dashed var(--border); }
-  .lv-row .lv-label { font-family: 'JetBrains Mono', monospace; color: var(--text-tertiary); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; }
-  .lv-row .lv-value { color: var(--text-primary); font-size: 15px; line-height: 1.65; }
-  @media (max-width: 640px) {
-    .lv-row { grid-template-columns: 1fr; gap: 4px; padding: 6px 0; }
-  }
-
-  /* numbered steps */
-  .step-row { display: grid; grid-template-columns: 36px 1fr; gap: 16px; align-items: baseline; }
-  .step-row + .step-row { margin-top: 22px; }
-  .step-row .step-num {
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--text-tertiary);
-    font-weight: 500;
-    font-size: 12px;
-    letter-spacing: 0.10em;
-    line-height: 1.5;
-    font-variant-numeric: tabular-nums;
-    padding-top: 1px;
-  }
-  .step-row .step-title { font-size: 15.5px; font-weight: 600; color: var(--text-primary); line-height: 1.45; letter-spacing: -0.005em; }
-  .step-row .step-desc  { font-size: 14px; color: var(--text-secondary); margin-top: 4px; line-height: 1.7; }
-
-  /* ROLE chip card */
-  .role-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 22px 22px 24px;
-    transition: border-color 200ms ease-out, transform 200ms ease-out, box-shadow 200ms ease-out;
-    position: relative;
-    overflow: hidden;
-  }
-  .role-card::before {
-    content: ''; position: absolute; top: 0; left: 0; height: 2px; width: 0;
-    background: var(--accent); transition: width 320ms ease;
-  }
-  .role-card:hover { border-color: var(--accent-warm); transform: translateY(-1px); }
-  .role-card:hover::before { width: 100%; }
-  .role-card .role-num {
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--accent); font-weight: 500; font-size: 11px; letter-spacing: 0.14em; margin-bottom: 14px; display: block;
-  }
-  .role-card .role-title { color: var(--text-primary); font-size: 15px; font-weight: 600; line-height: 1.4; letter-spacing: -0.005em; }
-  .role-card .role-sep { width: 28px; height: 1px; background: var(--border-strong); margin: 14px 0; }
-  .role-card .role-desc { color: var(--text-secondary); font-size: 13.5px; line-height: 1.65; }
-
-  .kw-chip {
-    display: inline-block;
-    background: var(--soft);
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    padding: 5px 12px;
-    font-size: 12px;
-    color: var(--text-secondary);
-    letter-spacing: 0.01em;
-    font-family: 'JetBrains Mono', monospace;
-  }
-
-  /* Project hero */
-  .project-hero {
-    position: relative;
-    border-radius: 16px;
-    background: linear-gradient(180deg, var(--soft) 0%, var(--bg) 100%);
-    border: 1px solid var(--border);
-    overflow: hidden;
-  }
-  .project-hero::before {
-    content: ''; position: absolute; top: 0; right: 0; width: 280px; height: 280px;
-    background: radial-gradient(circle, rgba(184,155,110,0.18) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .project-num-big {
-    font-family: 'Instrument Serif', 'Times New Roman', Georgia, serif;
-    font-weight: 400;
-    font-style: italic;
-    font-size: 112px;
-    line-height: 0.9;
-    letter-spacing: -0.04em;
-    color: var(--accent);
-    opacity: 0.95;
-    font-variant-numeric: tabular-nums;
-  }
-  @media (min-width: 768px) { .project-num-big { font-size: 160px; } }
-
-  /* Sub-project chip */
-  .sub-chip {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 6px 14px;
-    border: 1px solid var(--border-strong);
-    border-radius: 999px;
-    background: var(--surface);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-secondary);
-  }
-  .sub-chip .dot { width: 5px; height: 5px; border-radius: 999px; background: var(--accent); }
-  .sub-chip.lead { background: var(--text-primary); border-color: var(--text-primary); color: #fff; }
-  .sub-chip.lead .dot { background: var(--accent-warm); }
-
-  /* Hero name display */
-  .hero-name {
-    font-family: 'Pretendard', 'Inter', system-ui, sans-serif;
-    font-weight: 800;
-    letter-spacing: -0.045em;
-  }
-  .accent-text { color: var(--accent); font-weight: 700; }
-
-  /* Pulse dot */
-  .pulse-dot { position: relative; width: 8px; height: 8px; border-radius: 999px; background: #5BA88B; display: inline-block; }
-  .pulse-dot::after {
-    content: ''; position: absolute; inset: 0; border-radius: 999px; background: #5BA88B;
-    animation: pulse 2s ease-out infinite;
-  }
-  @keyframes pulse {
-    0% { transform: scale(1); opacity: 0.6; }
-    100% { transform: scale(2.6); opacity: 0; }
-  }
-
-  @media (max-width: 640px) {
-    .nav-links a { font-size: 12px; }
-  }
-
-  /* Print */
-  @media print {
-    .rail, header, .no-print { display: none !important; }
-  }
-</style>
-</head>
-<body>
-<div id="root"></div>
-
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-
-<script type="text/babel" data-presets="react" src="components/foundations.jsx"></script>
-<script type="text/babel" data-presets="react" src="components/sections.jsx"></script>
-<script type="text/babel" data-presets="react" src="components/projects.jsx"></script>
-<script type="text/babel" data-presets="react" src="components/app.jsx"></script>
-
-</body>
-</html>
+Object.assign(window, { Hero, About, Career, RoleSection, Skills, Contact, Footer });

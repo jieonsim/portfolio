@@ -135,9 +135,9 @@ function About() {
 /* Career */
 function Career() {
   const nodes = [
-    { period: '2018.02 — 2024.02', company: 'NHN Service',  role: 'Customer Service', tenure: '6년',     quote: '사용자가 무엇에 막히는지를 가장 가까이서 들어왔습니다' },
-    { period: '2024.09 — 2026.01', company: '인터엑스',     role: 'AI Consultant',    tenure: '1년 5개월', quote: 'AI 모델의 오분류를 데이터·로직으로 풀어내는 법을 익혔습니다' },
     { period: '2026.01 — 재직 중', company: '포지큐브',     role: 'Prompt Engineer',  tenure: '4개월',    quote: 'AI Agent를 기획·설계·구현·검증까지 직접 책임집니다' },
+    { period: '2024.09 — 2026.01', company: '인터엑스',     role: 'AI Consultant',    tenure: '1년 5개월', quote: 'AI 모델의 오분류를 데이터·로직으로 풀어내는 법을 익혔습니다' },
+    { period: '2018.02 — 2024.02', company: 'NHN Service',  role: 'Customer Service', tenure: '6년',     quote: '사용자가 무엇에 막히는지를 가장 가까이서 들어왔습니다' },
   ];
   return (
     <section id="career" className="py-24 md:py-32" style={{ borderTop: '1px solid var(--border)' }}>
@@ -146,8 +146,7 @@ function Career() {
           <div className="flex items-center gap-5">
             <span className="section-num">— 02</span>
             <h2 className="text-[28px] md:text-[40px] font-semibold tracking-[-0.025em]" style={{ color: 'var(--text-primary)' }}>
-              <span>Career</span>{' '}
-              <span className="accent-text">— 7년 9개월의 궤적</span>
+              <span>Career</span>
             </h2>
           </div>
         </div>
@@ -177,6 +176,11 @@ function Career() {
               </li>
             ))}
           </ul>
+
+          <div className="mt-12 md:mt-14 pl-12 flex flex-wrap items-baseline gap-x-4 gap-y-1 pt-7" style={{ borderTop: '1px dashed var(--border)' }}>
+            <span className="mono text-[10.5px] uppercase tracking-[0.18em]" style={{ color: 'var(--text-tertiary)' }}>Total</span>
+            <span className="mono text-[10.5px] uppercase tracking-[0.18em] tnum" style={{ color: 'var(--text-tertiary)' }}>7년 9개월</span>
+          </div>
         </div>
       </div>
     </section>
@@ -217,8 +221,7 @@ function Skills() {
           <div className="flex items-center gap-5">
             <span className="section-num">— 06</span>
             <h2 className="text-[28px] md:text-[40px] font-semibold tracking-[-0.025em]" style={{ color: 'var(--text-primary)' }}>
-              <span>Skills</span>{' '}
-              <span className="accent-text">— Stack</span>
+              <span>Skills</span>
             </h2>
           </div>
         </div>
@@ -271,7 +274,7 @@ function Contact() {
               <span aria-hidden="true" className="text-[20px] transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
                     style={{ color: 'var(--accent)' }}>↗</span>
             </div>
-            <div className="text-[20px] md:text-[22px] font-semibold tnum tracking-[-0.01em]" style={{ color: 'var(--text-primary)' }}>
+            <div className="text-[16px] md:text-[17px] font-semibold tnum tracking-[-0.005em]" style={{ color: 'var(--text-primary)' }}>
               zieonsim@gmail.com
             </div>
           </a>
@@ -279,7 +282,7 @@ function Contact() {
           <div className="md:col-span-3 rounded-[16px] px-7 py-6 flex flex-col justify-between"
                style={{ background: 'var(--surface)', border: '1px solid var(--border)', minHeight: 116 }}>
             <div className="mono text-[10.5px] tracking-[0.18em] uppercase" style={{ color: 'var(--text-tertiary)' }}>Phone</div>
-            <div className="text-[20px] md:text-[22px] font-semibold tnum tracking-[-0.005em]" style={{ color: 'var(--text-primary)' }}>
+            <div className="text-[16px] md:text-[17px] font-semibold tnum tracking-[-0.005em]" style={{ color: 'var(--text-primary)' }}>
               010-8549-5209
             </div>
           </div>
@@ -287,7 +290,7 @@ function Contact() {
           <div className="md:col-span-3 rounded-[16px] px-7 py-6 flex flex-col justify-between"
                style={{ background: 'var(--surface)', border: '1px solid var(--border)', minHeight: 116 }}>
             <div className="mono text-[10.5px] tracking-[0.18em] uppercase" style={{ color: 'var(--text-tertiary)' }}>Location</div>
-            <div className="text-[20px] md:text-[22px] font-semibold tracking-[-0.005em]" style={{ color: 'var(--text-primary)' }}>
+            <div className="text-[16px] md:text-[17px] font-semibold tracking-[-0.005em]" style={{ color: 'var(--text-primary)' }}>
               Seoul, KR
             </div>
           </div>

@@ -45,7 +45,6 @@ function WorkflowDiagram() {
     <div className="rounded-[14px] overflow-hidden" style={{ background: 'var(--soft)', border: '1px solid var(--border)' }}>
       <div className="px-5 py-3 flex items-center justify-between" style={{ borderBottom: '1px solid var(--border)', background: 'var(--bg-warm)' }}>
         <span className="mono text-[10.5px] tracking-[0.16em] uppercase" style={{ color: 'var(--text-tertiary)' }}>Workflow · 시나리오 다이어그램</span>
-        <span className="mono text-[10px]" style={{ color: 'var(--text-tertiary)' }}>5 levels · 16 nodes</span>
       </div>
       <div className="hidden md:block p-2">
         <svg viewBox={`0 0 ${W} ${H}`} width="100%" preserveAspectRatio="xMidYMid meet" style={{ display: 'block' }}>

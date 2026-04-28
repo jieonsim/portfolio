@@ -56,9 +56,9 @@ function SectionRail() {
   const sections = [
     ['01', 'About', '#about'],
     ['02', 'Career', '#career'],
-    ['03', 'Hana', '#projects'],
+    ['03', 'POSICUBE', '#projects'],
     ['04', 'InterX', '#proj-interx'],
-    ['05', 'NHN', '#proj-nhn'],
+    ['05', 'NHN SERVICE', '#proj-nhn'],
     ['06', 'Contact', '#contact'],
   ];
   const [active, setActive] = useState('#about');

@@ -84,14 +84,14 @@ function About() {
               <p className="text-[18px] md:text-[20px] leading-[1.7] font-medium tracking-[-0.005em]"
                  style={{ textWrap: 'pretty', color: 'var(--text-primary)' }}>
                 <span className="accent-text">"</span>
-                에이전트 페르소나 기획부터 시나리오 로직 설계, 인터페이스 구현까지 — 제품의 시작과 끝을 직접 책임집니다.
+                에이전트 페르소나 기획부터 시나리오 로직 설계, 인터페이스 구현까지 — 제품의 시작과 끝을 모두 책임집니다.
                 <span className="accent-text">"</span>
               </p>
               <p className="text-[15px] md:text-[16px] leading-[1.78]" style={{ textWrap: 'pretty', color: 'var(--text-secondary)' }}>
                 테스트 데이터를 기획·로직 개선으로 되돌리는 선순환 구조를 직접 만들고, 기획자–엔지니어 사이의 정보 병목을 없애 가장 빠른 속도로 제품 진화를 가능하게 합니다.
               </p>
               <p className="text-[15px] md:text-[16px] leading-[1.78]" style={{ textWrap: 'pretty', color: 'var(--text-secondary)' }}>
-                기술적 실현 가능성과 비즈니스 가치를 동시에 고려하며, 사용자 이해를 코드와 데이터로 옮기는 일을 가장 잘합니다.
+                기술적 실현 가능성과 비즈니스 가치를 동시에 고려하며, 사용자 이해를 로직과 데이터로 옮기는 일을 가장 잘합니다.
               </p>
             </div>
           </div>
@@ -133,7 +133,7 @@ function About() {
 /* Career */
 function Career() {
   const nodes = [
-    { period: '2026.01 — 재직 중', company: '포지큐브',     role: 'Prompt Engineer',  tenure: '4개월',    quote: 'AI Agent를 기획·설계·구현·검증까지 직접 책임집니다' },
+    { period: '2026.01 — 재직 중', company: '포지큐브',     role: 'Prompt Engineer',  tenure: '4개월',    quote: 'AI Agent의 기획·설계·구현·검증까지 모두 책임집니다' },
     { period: '2024.09 — 2026.01', company: '인터엑스',     role: 'AI Consultant',    tenure: '1년 5개월', quote: 'AI 모델의 오분류를 데이터·로직으로 풀어내는 법을 익혔습니다' },
     { period: '2018.02 — 2024.02', company: 'NHN Service',  role: 'Customer Service', tenure: '6년',     quote: '사용자가 무엇에 막히는지를 가장 가까이서 들어왔습니다' },
   ];

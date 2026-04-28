@@ -498,7 +498,7 @@ function ProjectHana() {
             resultBullets={[
               '배포 전 인제스트·청킹 설계에 리스크 선반영 → 운영 후 인덱스 재구축 리스크 축소',
               '수급 문서 분류·이력 관리 체계로 상품 개정 이벤트 발생 시 즉시 대응 가능',
-              '가중 평균 보존율 모델 + 카테고리별 정량 지표 확보 — 용어집 구축·2-pass 전처리 규칙 등 후속 개선 액션 도출',
+              '가중 평균 보존율 + 카테고리별 정량 지표 확보 — 용어집 구축·2-pass 전처리 규칙 등 후속 개선 액션 도출',
             ]}
             validation={
               <div className="space-y-7">
@@ -595,7 +595,7 @@ function ProjectHana() {
                 </div>
 
                 <p className="text-[12.5px] leading-[1.7]" style={{ textWrap: 'pretty', color: 'var(--text-tertiary)' }}>
-                  영역별 비중을 반영한 가중 평균 보존율 → 단순 평균이 아닌 문서 품질에 대한 객관적 근거 확보. 카테고리·패턴 단위 정량 지표로 후속 개선 액션(용어집 구축·2-pass 전처리 규칙) 도출.
+                  영역별 비중을 반영한 가중 평균 보존율 → 단순 평균이 아닌 문서 품질에 대한 객관적 근거 확보. 카테고리·패턴 단위 정량 지표로 후속 개선 액션 도출.
                 </p>
               </div>
             }
@@ -624,7 +624,7 @@ function ProjectHana() {
 /* AnalysisMiniPreview */
 function AnalysisMiniPreview() {
   const pipeline = [
-    { lbl: '01 · Input',     title: '두 시점 판정 결과 CSV', desc: '모델 버전 업데이트 전·후 수십만 건의 판정 결과 입력' },
+    { lbl: '01 · Input',     title: '두 시점 판정 결과 데이터', desc: '모델 버전 업데이트 전·후 수십만 건의 판정 결과 입력' },
     { lbl: '02 · Match',     title: '이미지 경로 자동 매칭',  desc: 'Path 기준 동일 이미지를 1:1로 매칭해 전후 비교 단위 확보' },
     { lbl: '03 · Aggregate', title: '전환 패턴 통계 산출',    desc: '판정 변화 조합별 건수·비율 자동 집계 — OK·NG·UNK + AICodeName' },
     { lbl: '04 · Output',    title: 'Excel 리포트 자동 생성', desc: '건별 추적 시트 + 전환 통계 시트 2 시트로 자동 출력 (xlsxwriter)' },

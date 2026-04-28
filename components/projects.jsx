@@ -621,6 +621,43 @@ function AnalysisMiniPreview() {
                 </div>
               </div>
             </div>
+
+            {/* 건별 추적 샘플 */}
+            <div className="mt-5 rounded-[10px] p-4" style={{ background: 'var(--soft)', border: '1px solid var(--border)' }}>
+              <div className="flex items-center justify-between mb-3">
+                <div className="text-[12.5px] font-semibold" style={{ color: 'var(--text-primary)' }}>건별 추적 샘플</div>
+                <div className="mono text-[10.5px]" style={{ color: 'var(--text-tertiary)' }}>이미지 경로 매칭 결과</div>
+              </div>
+              <div style={{ overflowX: 'auto' }}>
+                <table className="w-full text-[11.5px]" style={{ color: 'var(--text-primary)', borderCollapse: 'collapse' }}>
+                  <thead>
+                    <tr style={{ color: 'var(--text-tertiary)' }}>
+                      <th className="py-2 px-2 mono uppercase tracking-[0.06em] text-[10px]" style={{ textAlign: 'left', fontWeight: 400 }}>Image Path</th>
+                      <th className="py-2 px-2 mono uppercase tracking-[0.06em] text-[10px]" style={{ textAlign: 'left', fontWeight: 400 }}>Before</th>
+                      <th className="py-2 px-2 mono uppercase tracking-[0.06em] text-[10px]" style={{ textAlign: 'left', fontWeight: 400 }}>After</th>
+                      <th className="py-2 px-2 mono uppercase tracking-[0.06em] text-[10px]" style={{ textAlign: 'left', fontWeight: 400 }}>AICodeName</th>
+                      <th className="py-2 px-2 mono uppercase tracking-[0.06em] text-[10px]" style={{ textAlign: 'left', fontWeight: 400 }}>Δ</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      { path: '/AFVI/MX-218/2025-11-04/img-018721.tif', b: 'NG',  a: 'OK',  code: 'Particle → Particle', delta: '개선' },
+                      { path: '/AFVI/MX-218/2025-11-04/img-018992.tif', b: 'OK',  a: 'NG',  code: 'Discolor → Peeloff',  delta: '리스크' },
+                      { path: '/AFVI/MX-219/2025-11-04/img-019104.tif', b: 'NG',  a: 'OK',  code: 'Open → Scratch',      delta: '개선' },
+                      { path: '/AFVI/MX-220/2025-11-04/img-019288.tif', b: 'UNK', a: 'NG',  code: 'Short → Peeloff',     delta: '경계' },
+                    ].map((r, i) => (
+                      <tr key={i} style={{ borderTop: '1px solid var(--border)' }}>
+                        <td className="py-2 px-2 mono text-[11px]" style={{ color: 'var(--text-secondary)' }}>{r.path}</td>
+                        <td className="py-2 px-2 mono" style={{ color: 'var(--text-tertiary)' }}>{r.b}</td>
+                        <td className="py-2 px-2 mono" style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{r.a}</td>
+                        <td className="py-2 px-2" style={{ color: 'var(--text-secondary)' }}>{r.code}</td>
+                        <td className="py-2 px-2 mono text-[10.5px]" style={{ color: r.delta === '개선' ? 'var(--accent)' : 'var(--text-tertiary)' }}>{r.delta}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -681,7 +718,7 @@ function ProjectInterX() {
             <div className="card-hover rounded-[14px] p-7 md:p-8" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
               <div className="section-eyebrow">성과 · 모델 로직 개선</div>
               <div className="mt-6 flex items-baseline gap-3 tnum">
-                <span className="text-[60px] md:text-[80px] font-medium tracking-[-0.04em] leading-none" style={{ color: 'var(--accent)' }}>+10.38</span>
+                <span className="text-[60px] md:text-[80px] font-semibold tracking-[-0.04em] leading-none" style={{ color: 'var(--accent)' }}>+10.38</span>
                 <span className="text-[16px] mono" style={{ color: 'var(--text-secondary)' }}>%p</span>
               </div>
               <div className="mt-3 mono text-[13px] tnum" style={{ color: 'var(--text-secondary)' }}>OK Rate · 62.21% → 72.59%</div>
@@ -699,7 +736,7 @@ function ProjectInterX() {
             <div className="card-hover rounded-[14px] p-7 md:p-8" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
               <div className="section-eyebrow">성과 · 데이터 전략</div>
               <div className="mt-6 flex items-baseline gap-3 tnum">
-                <span className="text-[60px] md:text-[80px] font-medium tracking-[-0.04em] leading-none" style={{ color: 'var(--accent)' }}>+33.5</span>
+                <span className="text-[60px] md:text-[80px] font-semibold tracking-[-0.04em] leading-none" style={{ color: 'var(--accent)' }}>+33.5</span>
                 <span className="text-[16px] mono" style={{ color: 'var(--text-secondary)' }}>% 확장</span>
               </div>
               <div className="mt-3 mono text-[13px] tnum" style={{ color: 'var(--text-secondary)' }}>데이터셋 · 109,351 → 145,984 (2025.02 → 12)</div>

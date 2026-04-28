@@ -12,10 +12,10 @@ function Hero() {
           <span className="line-up block text-[44px] sm:text-[64px] md:text-[84px] lg:text-[100px]" style={{ animationDelay: '180ms' }}>
             CS가 AI를 만났을 때,
           </span>
-          <span className="line-up block text-[44px] sm:text-[64px] md:text-[84px] lg:text-[100px]" style={{ animationDelay: '320ms' }}>
+          <span className="line-up block text-[44px] sm:text-[64px] md:text-[84px] lg:text-[100px] accent-text" style={{ animationDelay: '320ms' }}>
             사용자를 가장 잘 아는
           </span>
-          <span className="line-up block text-[44px] sm:text-[64px] md:text-[84px] lg:text-[100px] mt-1 accent-text" style={{ animationDelay: '460ms' }}>
+          <span className="line-up block text-[44px] sm:text-[64px] md:text-[84px] lg:text-[100px] mt-1" style={{ animationDelay: '460ms', color: 'var(--text-primary)' }}>
             Problem Solver.
           </span>
         </h1>

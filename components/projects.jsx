@@ -300,8 +300,8 @@ function ProjectHana() {
               ]}
               approach={`검수 직후 사용자의 동의·재요청을 별도 의도로 정의하고, 그 경로에서만 직전 검수의 개선 포인트를 번역 페르소나에 자동 주입하는 독립 피드백 루프를 설계하여 일반 번역 플로우와 분리해 변경 영향을 격리했습니다.`}
               executionSteps={[
-                { title: '재번역 전용 의도 분기 신설',  desc: '두 조건(직전 응답 == 검수 결과 ∧ 발화 ∈ 키워드 집합)의 AND 결합으로 일반 의도 흐름과 격리.' },
-                { title: '검수 피드백 자동 추출',       desc: '검수 응답의 JSON 메타데이터를 자동 파싱해 페르소나 우선순위 섹션으로 주입 — 매 재번역마다 가장 최신 피드백이 최우선 반영.' },
+                { title: '재번역 전용 의도 분기 신설',  desc: '직전 응답이 검수 결과인지와 사용자 입력의 키워드 일치 여부, 두 조건을 함께 만족할 때만 재번역 의도로 분류 — 일반 의도 흐름과 격리.' },
+                { title: '검수 피드백 자동 추출',       desc: '검수 응답에 담긴 개선 포인트 데이터를 자동 추출해 다음 번역 AI의 우선 지침으로 주입 — 매 재번역마다 가장 최신 피드백이 최우선 반영.' },
                 { title: '대화 이력 참조 인덱스 교정',   desc: '이력 정렬 방향(과거→최신)을 잘못 가정한 인덱스 오류를 발견·교정 — 의도 분류기가 항상 가장 최신 응답을 기준으로 판단하도록 회복.' },
               ]}
               resultBullets={[
@@ -358,10 +358,10 @@ function ProjectHana() {
                         <div className="space-y-2">
                           {[
                             { label: '사용자 발화', sub: '"재번역해줘" / "네"', emphasis: false },
-                            { label: '직전 응답 == 검수 결과 ?', sub: '검수 지표·JSON 마커·마무리 질문으로 판별', emphasis: true },
+                            { label: '직전 응답이 검수 결과인가?', sub: '검수 지표·응답 메타·마무리 질문으로 판별', emphasis: true },
                             { label: '키워드 매칭 + 확답 판정', sub: '재번역 키워드 OR 확답 → 재번역 의도 확정', emphasis: true },
-                            { label: '검수 메타에서 개선 포인트 추출', sub: 'JSON 주석 자동 파싱 → improvement_points', emphasis: true },
-                            { label: '페르소나에 우선순위 섹션 주입', sub: 'Recent Review Feedback (Highest Priority)', emphasis: true },
+                            { label: '검수 응답에서 개선 포인트 추출', sub: '응답 메타데이터에서 자동 추출', emphasis: true },
+                            { label: '페르소나에 우선순위 섹션 주입', sub: '직전 검수 피드백 — 최우선 반영', emphasis: true },
                           ].map((n, i, arr) => (
                             <React.Fragment key={`af-${i}`}>
                               <div className="rounded-[8px] px-4 py-2.5" style={{ background: 'var(--surface)', border: `1px solid ${n.emphasis ? 'var(--accent)' : 'var(--border-strong)'}` }}>
@@ -385,20 +385,19 @@ function ProjectHana() {
 
                   {/* ====== Visual C : 의도 분류 규칙 카드 ====== */}
                   <div>
-                    <div className="flex items-center justify-between mb-3 gap-3">
-                      <div className="section-eyebrow">Decision Rule · 재번역 의도 판별 규칙</div>
-                      <span className="hidden md:inline mono text-[10px] tracking-[0.12em] uppercase" style={{ color: 'var(--text-tertiary)' }}>boolean rule</span>
+                    <div className="mb-3">
+                      <div className="section-eyebrow">재번역 의도 판별 규칙</div>
                     </div>
                     <div className="rounded-[12px] p-5 md:p-7" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
                       <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-5 items-stretch">
                         {/* Condition 01 */}
                         <div className="md:col-span-5 rounded-[10px] p-5" style={{ background: 'var(--soft)', border: '1px solid var(--border)' }}>
                           <div className="mono text-[10px] uppercase tracking-[0.14em] mb-2.5" style={{ color: 'var(--accent)' }}>Condition 01</div>
-                          <div className="text-[14.5px] font-semibold leading-[1.45] mb-3.5" style={{ color: 'var(--text-primary)' }}>직전 assistant 메시지가 검수 결과인가</div>
+                          <div className="text-[14.5px] font-semibold leading-[1.45] mb-3.5" style={{ color: 'var(--text-primary)' }}>직전 AI 응답이 검수 결과인가</div>
                           <div className="text-[11px] mb-2 mono uppercase tracking-[0.08em]" style={{ color: 'var(--text-tertiary)' }}>판별 단서</div>
                           <div className="flex flex-wrap gap-1.5">
                             <span className="kw-chip">검수 지표</span>
-                            <span className="kw-chip">JSON 마커</span>
+                            <span className="kw-chip">응답 메타</span>
                             <span className="kw-chip">"재번역을 진행할까요?"</span>
                           </div>
                         </div>
@@ -413,7 +412,7 @@ function ProjectHana() {
                         {/* Condition 02 */}
                         <div className="md:col-span-5 rounded-[10px] p-5" style={{ background: 'var(--soft)', border: '1px solid var(--border)' }}>
                           <div className="mono text-[10px] uppercase tracking-[0.14em] mb-2.5" style={{ color: 'var(--accent)' }}>Condition 02</div>
-                          <div className="text-[14.5px] font-semibold leading-[1.45] mb-3.5" style={{ color: 'var(--text-primary)' }}>현재 사용자 발화 ∈ 정의된 키워드 집합</div>
+                          <div className="text-[14.5px] font-semibold leading-[1.45] mb-3.5" style={{ color: 'var(--text-primary)' }}>사용자 입력이 정의된 키워드에 해당하는가</div>
                           <div className="text-[11px] mb-1.5 mono uppercase tracking-[0.08em]" style={{ color: 'var(--text-tertiary)' }}>재번역 키워드</div>
                           <div className="flex flex-wrap gap-1.5 mb-3">
                             <span className="kw-chip">재번역</span>
@@ -442,13 +441,16 @@ function ProjectHana() {
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5">
                           {[
-                            { k: 'intent', v: '"translate"' },
-                            { k: 'is_file_reuse', v: 'true' },
-                            { k: 'target_language', v: '이전값 재사용' },
+                            { ko: '의도', en: 'intent', v: '"번역"' },
+                            { ko: '파일 재사용', en: 'is_file_reuse', v: '적용' },
+                            { ko: '대상 언어', en: 'target_language', v: '이전값 재사용' },
                           ].map((p, i) => (
                             <div key={`var-${i}`} className="rounded-[8px] px-4 py-3" style={{ background: 'var(--surface)', border: '1px solid var(--border-strong)' }}>
-                              <div className="mono text-[10px] uppercase tracking-[0.08em]" style={{ color: 'var(--text-tertiary)' }}>{p.k}</div>
-                              <div className="mono text-[13px] mt-1 font-semibold" style={{ color: 'var(--text-primary)' }}>{p.v}</div>
+                              <div className="flex items-baseline gap-1.5 flex-wrap">
+                                <span className="text-[12px] font-medium" style={{ color: 'var(--text-secondary)' }}>{p.ko}</span>
+                                <span className="mono text-[10px]" style={{ color: 'var(--text-tertiary)' }}>{p.en}</span>
+                              </div>
+                              <div className="text-[13px] mt-1 font-semibold" style={{ color: 'var(--text-primary)' }}>{p.v}</div>
                             </div>
                           ))}
                         </div>
@@ -916,7 +918,7 @@ function ProjectInterX() {
               <div className="mt-3 mono text-[13px] tnum" style={{ color: 'var(--text-secondary)' }}>데이터셋 · 109,351 → 145,984 (2025.02 → 12)</div>
               <p className="mt-6 text-[14.5px] leading-[1.7]" style={{ textWrap: 'pretty', color: 'var(--text-primary)' }}>
                 무작위 데이터 수집의 비효율을 끊고, 과검·미검 이미지의 오분류 패턴 분석을 통해 개선 우선순위 결함 유형을 선별.
-                현장 엔지니어와 협업해 타깃 결함 유형 중심의 전략적 수집 프로세스를 구축하고 희소 클래스 데이터를 확보.
+                현장 오퍼레이터와 협업해 타깃 결함 유형 중심의 전략적 수집 프로세스를 구축하고 희소 클래스 데이터를 확보.
               </p>
               <div className="mt-6 pt-5 flex flex-wrap gap-2" style={{ borderTop: '1px solid var(--border)' }}>
                 <span className="kw-chip">희소 클래스 확보</span>

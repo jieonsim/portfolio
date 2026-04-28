@@ -24,8 +24,6 @@ function Hero() {
             사용자가 어디에서 막히는지를 가장 가까이서 들어온 시간을 기반으로,
             <br />
             이제 그 이해를 AI Agent의 기획·설계·구현으로 직접 옮깁니다.
-            <br />
-            문제 정의부터 프로덕트 출시까지, 영역의 경계 없이 끝까지 책임집니다.
           </p>
           <div className="line-up mt-10 flex flex-wrap items-center gap-3" style={{ animationDelay: '900ms' }}>
             <a href="#projects"

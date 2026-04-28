@@ -310,6 +310,159 @@ function ProjectHana() {
                 '검수 단계의 개선 포인트가 다음 번역에 자동 반영되는 피드백 루프 구축',
                 '재번역 전용 의도 분기 확보로 일반 플로우와 독립 관리 가능 — 응답 포맷 개편·효과 측정 등 후속 개선의 기반 확보',
               ]}
+              validation={
+                <div className="space-y-10">
+                  {/* ====== Visual A : Before / After 의도 분기 비교 ====== */}
+                  <div>
+                    <div className="flex items-center justify-between mb-3 gap-3">
+                      <div className="section-eyebrow">Before / After · 의도 분기 구조 전환</div>
+                      <span className="hidden md:inline mono text-[10px] tracking-[0.12em] uppercase" style={{ color: 'var(--text-tertiary)' }}>구조적 차이를 한눈에</span>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {/* Before */}
+                      <div className="rounded-[12px] p-5 md:p-6" style={{ background: 'var(--soft)', border: '1px solid var(--border)' }}>
+                        <div className="flex items-center justify-between mb-5">
+                          <span className="mono text-[10.5px] uppercase tracking-[0.16em]" style={{ color: 'var(--text-tertiary)' }}>Before</span>
+                          <span className="text-[11.5px]" style={{ color: 'var(--text-tertiary)' }}>재번역이 일반 의도에 흡수</span>
+                        </div>
+                        <div className="space-y-2">
+                          {[
+                            { label: '사용자 발화', sub: '"재번역해줘" / "네"' },
+                            { label: '의도 분류', sub: '재번역 미정의 — 단일 분기' },
+                            { label: '일반 문의로 분기', sub: '재번역도 같은 경로로 흡수', warn: true },
+                            { label: '직전 지시문 그대로 재실행', sub: '검수 피드백 미전달', warn: true },
+                          ].map((n, i, arr) => (
+                            <React.Fragment key={`bf-${i}`}>
+                              <div className="rounded-[8px] px-4 py-2.5" style={{ background: 'var(--surface)', border: `1px solid ${n.warn ? 'var(--border-strong)' : 'var(--border)'}` }}>
+                                <div className="text-[13px] font-medium" style={{ color: 'var(--text-primary)' }}>{n.label}</div>
+                                <div className="text-[11.5px] mt-0.5" style={{ color: 'var(--text-tertiary)' }}>{n.sub}</div>
+                              </div>
+                              {i < arr.length - 1 && (
+                                <div className="flex justify-center py-0.5"><span style={{ color: 'var(--border-strong)' }}>↓</span></div>
+                              )}
+                            </React.Fragment>
+                          ))}
+                          <div className="flex justify-center py-0.5"><span style={{ color: 'var(--border-strong)' }}>↓</span></div>
+                          <div className="rounded-[8px] px-4 py-3" style={{ background: 'var(--text-primary)', border: '1px solid var(--text-primary)', color: '#fff' }}>
+                            <div className="mono text-[10px] uppercase tracking-[0.12em]" style={{ color: '#9C9789' }}>Result</div>
+                            <div className="text-[13px] font-semibold mt-1">동일 결과물 반환 — 검수 가치 무력화</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* After */}
+                      <div className="rounded-[12px] p-5 md:p-6" style={{ background: 'var(--accent-soft)', border: '1px solid var(--accent)' }}>
+                        <div className="flex items-center justify-between mb-5">
+                          <span className="mono text-[10.5px] uppercase tracking-[0.16em]" style={{ color: 'var(--accent)' }}>After</span>
+                          <span className="text-[11.5px]" style={{ color: 'var(--accent-ink)' }}>재번역 전용 분기 + 피드백 자동 주입</span>
+                        </div>
+                        <div className="space-y-2">
+                          {[
+                            { label: '사용자 발화', sub: '"재번역해줘" / "네"', emphasis: false },
+                            { label: '직전 응답 == 검수 결과 ?', sub: '검수 지표·JSON 마커·마무리 질문으로 판별', emphasis: true },
+                            { label: '키워드 매칭 + 확답 판정', sub: '재번역 키워드 OR 확답 → 재번역 의도 확정', emphasis: true },
+                            { label: '검수 메타에서 개선 포인트 추출', sub: 'JSON 주석 자동 파싱 → improvement_points', emphasis: true },
+                            { label: '페르소나에 우선순위 섹션 주입', sub: 'Recent Review Feedback (Highest Priority)', emphasis: true },
+                          ].map((n, i, arr) => (
+                            <React.Fragment key={`af-${i}`}>
+                              <div className="rounded-[8px] px-4 py-2.5" style={{ background: 'var(--surface)', border: `1px solid ${n.emphasis ? 'var(--accent)' : 'var(--border-strong)'}` }}>
+                                <div className="text-[13px] font-medium" style={{ color: 'var(--text-primary)' }}>{n.label}</div>
+                                <div className="text-[11.5px] mt-0.5" style={{ color: 'var(--accent-ink)' }}>{n.sub}</div>
+                              </div>
+                              {i < arr.length - 1 && (
+                                <div className="flex justify-center py-0.5"><span style={{ color: 'var(--accent)' }}>↓</span></div>
+                              )}
+                            </React.Fragment>
+                          ))}
+                          <div className="flex justify-center py-0.5"><span style={{ color: 'var(--accent)' }}>↓</span></div>
+                          <div className="rounded-[8px] px-4 py-3" style={{ background: 'var(--accent)', border: '1px solid var(--accent)', color: '#fff' }}>
+                            <div className="mono text-[10px] uppercase tracking-[0.12em]" style={{ color: 'var(--accent-soft)' }}>Result</div>
+                            <div className="text-[13px] font-semibold mt-1">개선 포인트 반영된 재번역 실행</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* ====== Visual C : 의도 분류 규칙 카드 ====== */}
+                  <div>
+                    <div className="flex items-center justify-between mb-3 gap-3">
+                      <div className="section-eyebrow">Decision Rule · 재번역 의도 판별 규칙</div>
+                      <span className="hidden md:inline mono text-[10px] tracking-[0.12em] uppercase" style={{ color: 'var(--text-tertiary)' }}>boolean rule</span>
+                    </div>
+                    <div className="rounded-[12px] p-5 md:p-7" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
+                      <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-5 items-stretch">
+                        {/* Condition 01 */}
+                        <div className="md:col-span-5 rounded-[10px] p-5" style={{ background: 'var(--soft)', border: '1px solid var(--border)' }}>
+                          <div className="mono text-[10px] uppercase tracking-[0.14em] mb-2.5" style={{ color: 'var(--accent)' }}>Condition 01</div>
+                          <div className="text-[14.5px] font-semibold leading-[1.45] mb-3.5" style={{ color: 'var(--text-primary)' }}>직전 assistant 메시지가 검수 결과인가</div>
+                          <div className="text-[11px] mb-2 mono uppercase tracking-[0.08em]" style={{ color: 'var(--text-tertiary)' }}>판별 단서</div>
+                          <div className="flex flex-wrap gap-1.5">
+                            <span className="kw-chip">검수 지표</span>
+                            <span className="kw-chip">JSON 마커</span>
+                            <span className="kw-chip">"재번역을 진행할까요?"</span>
+                          </div>
+                        </div>
+
+                        {/* AND 연산자 */}
+                        <div className="md:col-span-2 flex md:flex-col items-center justify-center gap-2 py-2 md:py-0">
+                          <span className="block w-12 md:w-px h-px md:h-12" style={{ background: 'var(--border-strong)' }}></span>
+                          <span className="mono text-[12px] tracking-[0.18em] px-3 py-1 rounded-full" style={{ color: 'var(--text-secondary)', background: 'var(--soft)', border: '1px solid var(--border)' }}>AND</span>
+                          <span className="block w-12 md:w-px h-px md:h-12" style={{ background: 'var(--border-strong)' }}></span>
+                        </div>
+
+                        {/* Condition 02 */}
+                        <div className="md:col-span-5 rounded-[10px] p-5" style={{ background: 'var(--soft)', border: '1px solid var(--border)' }}>
+                          <div className="mono text-[10px] uppercase tracking-[0.14em] mb-2.5" style={{ color: 'var(--accent)' }}>Condition 02</div>
+                          <div className="text-[14.5px] font-semibold leading-[1.45] mb-3.5" style={{ color: 'var(--text-primary)' }}>현재 사용자 발화 ∈ 정의된 키워드 집합</div>
+                          <div className="text-[11px] mb-1.5 mono uppercase tracking-[0.08em]" style={{ color: 'var(--text-tertiary)' }}>재번역 키워드</div>
+                          <div className="flex flex-wrap gap-1.5 mb-3">
+                            <span className="kw-chip">재번역</span>
+                            <span className="kw-chip">다시 번역</span>
+                            <span className="kw-chip">피드백 반영</span>
+                          </div>
+                          <div className="text-[11px] mb-1.5 mono uppercase tracking-[0.08em]" style={{ color: 'var(--text-tertiary)' }}>확답 키워드</div>
+                          <div className="flex flex-wrap gap-1.5">
+                            <span className="kw-chip">네</span>
+                            <span className="kw-chip">예</span>
+                            <span className="kw-chip">OK</span>
+                            <span className="kw-chip">yes</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* THEN — 충족 시 분기 결과 */}
+                      <div className="mt-5 flex justify-center">
+                        <span className="mono text-[11px] tracking-[0.16em]" style={{ color: 'var(--accent)' }}>↓ THEN</span>
+                      </div>
+
+                      <div className="mt-3 rounded-[10px] p-5" style={{ background: 'var(--accent-soft)', border: '1px solid var(--accent)' }}>
+                        <div className="flex items-baseline gap-3 mb-3 flex-wrap">
+                          <span className="mono text-[10.5px] uppercase tracking-[0.16em]" style={{ color: 'var(--accent)' }}>재번역 의도 확정</span>
+                          <span className="text-[11.5px]" style={{ color: 'var(--accent-ink)' }}>파일·언어 자동 재사용 — 사용자 재입력 불필요</span>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5">
+                          {[
+                            { k: 'intent', v: '"translate"' },
+                            { k: 'is_file_reuse', v: 'true' },
+                            { k: 'target_language', v: '이전값 재사용' },
+                          ].map((p, i) => (
+                            <div key={`var-${i}`} className="rounded-[8px] px-4 py-3" style={{ background: 'var(--surface)', border: '1px solid var(--border-strong)' }}>
+                              <div className="mono text-[10px] uppercase tracking-[0.08em]" style={{ color: 'var(--text-tertiary)' }}>{p.k}</div>
+                              <div className="mono text-[13px] mt-1 font-semibold" style={{ color: 'var(--text-primary)' }}>{p.v}</div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Caption — 두 시각 요소를 한 문장으로 묶는 마무리 */}
+                  <p className="text-[12.5px] leading-[1.7]" style={{ textWrap: 'pretty', color: 'var(--text-tertiary)' }}>
+                    "재번역"이 일반 의도에 흡수되던 단일 분기를 → 검수 컨텍스트 + 키워드 매칭 결합 분기로 분리. 검수 결과의 개선 포인트가 페르소나 우선순위 섹션으로 자동 흘러 들어가는 독립 피드백 루프 확보.
+                  </p>
+                </div>
+              }
             />
           </div>
         </div>

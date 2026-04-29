@@ -912,10 +912,10 @@ function ProjectInterX() {
             <div className="card-hover rounded-[14px] p-7 md:p-8" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
               <div className="section-eyebrow">성과 · 데이터 전략</div>
               <div className="mt-6 flex items-baseline gap-3 tnum">
-                <span className="text-[60px] md:text-[80px] font-semibold tracking-[-0.04em] leading-none" style={{ color: 'var(--accent)' }}>+33.5</span>
+                <span className="text-[60px] md:text-[80px] font-semibold tracking-[-0.04em] leading-none" style={{ color: 'var(--accent)' }}>+36</span>
                 <span className="text-[16px] mono" style={{ color: 'var(--text-secondary)' }}>% 확장</span>
               </div>
-              <div className="mt-3 mono text-[13px] tnum" style={{ color: 'var(--text-secondary)' }}>데이터셋 · 109,351 → 145,984 (2025.02 → 12)</div>
+              <div className="mt-3 mono text-[13px] tnum" style={{ color: 'var(--text-secondary)' }}>데이터셋 · 109,351 → 148,596 (2025.02 → 12)</div>
               <p className="mt-6 text-[14.5px] leading-[1.7]" style={{ textWrap: 'pretty', color: 'var(--text-primary)' }}>
                 무작위 데이터 수집의 비효율을 끊고, 과검·미검 이미지의 오분류 패턴 분석을 통해 개선 우선순위 결함 유형을 선별.
                 현장 오퍼레이터와 협업해 타깃 결함 유형 중심의 전략적 수집 프로세스를 구축하고 희소 클래스 데이터를 확보.

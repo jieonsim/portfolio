@@ -88,7 +88,7 @@ function About() {
                 <span className="accent-text">"</span>
               </p>
               <p className="text-[15px] md:text-[16px] leading-[1.78]" style={{ textWrap: 'pretty', color: 'var(--text-secondary)' }}>
-                테스트 데이터를 기획·로직 개선으로 되돌리는 선순환 구조를 직접 만들고, 기획자–엔지니어 사이의 정보 병목을 없애 가장 빠른 속도로 제품 진화를 가능하게 합니다.
+                데이터를 기획·로직 개선으로 되돌리는 선순환 구조를 직접 만들고, 기획자–엔지니어 사이의 정보 병목을 없애 가장 빠른 속도로 제품 진화를 가능하게 합니다.
               </p>
               <p className="text-[15px] md:text-[16px] leading-[1.78]" style={{ textWrap: 'pretty', color: 'var(--text-secondary)' }}>
                 기술적 실현 가능성과 비즈니스 가치를 동시에 고려하며, 사용자 이해를 로직과 데이터로 옮기는 일을 가장 잘합니다.

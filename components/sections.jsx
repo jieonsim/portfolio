@@ -133,9 +133,9 @@ function About() {
 /* Career */
 function Career() {
   const nodes = [
-    { period: '2026.01 — 재직 중', company: '포지큐브',     role: 'Prompt Engineer',  tenure: '4개월',    quote: 'AI Agent의 기획·설계·구현·검증까지 모두 책임집니다' },
+    { period: '2026.01 — 재직 중', company: '포지큐브',     role: 'Prompt Engineer',  tenure: '5개월',    quote: 'AI Agent의 기획·설계·구현·검증까지 모두 책임집니다' },
     { period: '2024.09 — 2026.01', company: '인터엑스',     role: 'AI Consultant',    tenure: '1년 5개월', quote: 'AI 모델의 오분류를 데이터·로직으로 풀어내는 법을 익혔습니다' },
-    { period: '2018.02 — 2024.02', company: 'NHN Service',  role: 'Customer Service', tenure: '6년',     quote: '사용자가 무엇에 막히는지를 가장 가까이서 들어왔습니다' },
+    { period: '2018.02 — 2024.02', company: 'NHN Service',  role: 'Customer Service', tenure: '6년 1개월',     quote: '사용자가 무엇에 막히는지를 가장 가까이서 들어왔습니다' },
   ];
   return (
     <section id="career" className="py-24 md:py-32" style={{ borderTop: '1px solid var(--border)' }}>
@@ -177,7 +177,7 @@ function Career() {
 
           <div className="mt-12 md:mt-14 pl-12 flex flex-wrap items-baseline gap-x-4 gap-y-1 pt-7" style={{ borderTop: '1px dashed var(--border)' }}>
             <span className="mono text-[10.5px] uppercase tracking-[0.18em]" style={{ color: 'var(--text-tertiary)' }}>Total</span>
-            <span className="mono text-[10.5px] uppercase tracking-[0.18em] tnum" style={{ color: 'var(--text-tertiary)' }}>7년 9개월</span>
+            <span className="mono text-[10.5px] uppercase tracking-[0.18em] tnum" style={{ color: 'var(--text-tertiary)' }}>7년 10개월</span>
           </div>
         </div>
       </div>
